@@ -32,7 +32,8 @@
     <div class="card-header">
       {{-- <a href="#" class="h1"><b>Chatomz</b>Company</a> --}}
       <section class="p-3 m-3">
-        <img src="{{ asset('/img/logo-bunefit.png')}}" alt="" class="img-fluid">
+        {{-- <img src="{{ asset('/img/logo-bunefit.png')}}" alt="" class="img-fluid"> --}}
+        SMAN 1 CIAWI
       </section>
     </div>
     <div class="card-body">

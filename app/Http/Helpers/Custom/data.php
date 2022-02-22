@@ -11,3 +11,14 @@ if (! function_exists('orang_photo')) {
         return $nama_file;
     }
 }
+if (! function_exists('siswa')) {
+    function siswa()
+    {
+        $siswa = [
+            ['44553545','firman setiawan','laki-laki','perum CGM blok A23'],
+            ['44553545','lina marlina','perempuan','perum CGM blok A23'],
+            ['44553545','andri anjasmara','laki-laki','perum CGM blok A23'],
+        ];
+        return $siswa;
+    }
+}

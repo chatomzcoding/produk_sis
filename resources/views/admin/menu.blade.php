@@ -1,7 +1,7 @@
 <li class="nav-item">
-  <a href="{{ url('/siswa')}}" class="nav-link">
+  <a href="{{ url('/demo')}}" class="nav-link">
     <i class="nav-icon fas fa-user-tie"></i>
-    <p class="text">Data Siswa</p>
+    <p class="text">Data Demo</p>
   </a>
 </li>
 <li class="nav-item">

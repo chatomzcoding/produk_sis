@@ -9,14 +9,14 @@
     <link href="{{ asset('vendor/bootstrap-4.3.1/css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Chatomz System</title>
+    <title>SISTEM SEKOLAH</title>
   </head>
   <body>
     <div class="container">
       <header>
         <div class="jumbotron jumbotron-fluid">
           <div class="container">
-            <h1 class="display-4">Core Sistem Chatomz</h1>
+            <h1 class="display-4">SELAMAT DATANG DI SEKOLAH SMAN 1 CIAWI</h1>
             <p class="lead">Template Aplikasi Laravel 8</p>
             <small>versi 2.1.18</small>
           </div>

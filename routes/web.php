@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\InfowebsiteController;
+use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Homepage\LandingController;
 use App\Http\Controllers\Sistem\UserController;
 use App\Http\Controllers\Sistem\VisitorController;
@@ -18,11 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // HOMEPAGE
-Route::get('/',function ()
-{
-    return 'hallo';
-});
-// Route::get('hallo',[LandingController::class,'index']);
+Route::get('/',[LandingController::class,'index']);
 /*
 -------------------------------------------------------------------------------------------------
 */
@@ -30,6 +27,9 @@ Route::get('/',function ()
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // Umum
     Route::get('/dashboard', 'App\Http\Controllers\HomeController@index')->name('dashboard');
+
+    Route::get('/demo',[DemoController::class,'index']);
+
 
     // Route Admin
     Route::middleware(['admin'])->group(function () {

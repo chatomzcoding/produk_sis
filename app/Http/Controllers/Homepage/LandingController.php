@@ -24,6 +24,6 @@ class LandingController extends Controller
 
     public function index()
     {
-        // return view('homepage.index');
+        return view('homepage.index');
     }
 }
