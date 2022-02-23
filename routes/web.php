@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\ArtikelController;
+use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\InfowebsiteController;
+use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Homepage\LandingController;
 use App\Http\Controllers\Sistem\UserController;
@@ -38,6 +42,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         // SISTEM
         Route::resource('info-website', InfowebsiteController::class);
         Route::resource('visitor', VisitorController::class);
+        
+        // DATA MASTER
+        Route::resource('artikel', ArtikelController::class);
+        Route::resource('kategori', KategoriController::class);
+        Route::resource('galeri', GaleriController::class);
+        Route::resource('sarana', SaranaController::class);
         
         // PERCOBAAN
         Route::resource('siswa', SiswaController::class);

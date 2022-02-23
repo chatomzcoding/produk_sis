@@ -1,5 +1,6 @@
 @php
     $user = Auth::user();
+    $datapokok = DbSistem::showtablefirst('info_website');
 @endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -145,8 +146,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/dashboard')}}" class="brand-link">
-      <img src="{{ asset('img/bunefit.png')}}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Aplikasi Admin</span>
+      <img src="{{ asset('img/admin/info/'.$datapokok->logo_mini)}}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">{{ $datapokok->nama_aplikasi }}</span>
     </a>
 
     <!-- Sidebar -->
