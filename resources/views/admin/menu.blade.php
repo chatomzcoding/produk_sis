@@ -12,6 +12,36 @@
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">
+      <i class="nav-icon fas fa-book-open"></i>
+      <p>
+        Data KBM
+        <i class="fas fa-angle-left right"></i>
+        {{-- <span class="badge badge-info right">6</span> --}}
+      </p>
+    </a>
+    <ul class="nav nav-treeview">
+      <li class="nav-item">
+        <a href="{{ url('/tahunajaran')}}" class="nav-link">
+          &nbsp;&nbsp;<i class="fas fa-list nav-icon"></i>
+          <p>Tahun Ajaran</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/kelas')}}" class="nav-link">
+          &nbsp;&nbsp;<i class="fas fa-list nav-icon"></i>
+          <p>Kelas</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{ url('/matapelajaran')}}" class="nav-link">
+          &nbsp;&nbsp;<i class="fas fa-list nav-icon"></i>
+          <p>Mata Pelajaran</p>
+        </a>
+      </li>
+    </ul>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link">
       <i class="nav-icon fas fa-user-tie"></i>
       <p>
         Data Master
