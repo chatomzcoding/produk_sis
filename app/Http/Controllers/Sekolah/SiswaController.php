@@ -20,7 +20,12 @@ class SiswaController extends Controller
         $main   = [
             'link' => 'siswa',
             'statistik' => [
-                'siswa' => count($siswa)
+                'siswa' => [
+                    'total' => count($siswa),
+                    'l' => Siswa::where('jk','laki-laki')->count(),
+                    'p' => Siswa::where('jk','perempuan')->count(),
+                    'aktif' => Siswa::where('status','aktif')->count()
+                ]
             ]
         ];
 
@@ -34,7 +39,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('sekolah.siswa.create');
     }
 
     /**
@@ -45,7 +50,40 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (isset($request->poto)) {
+            $request->validate([
+                'poto' => 'required|file|image|mimes:jpeg,png,jpg|max:2000',
+            ]);
+            // menyimpan data file yang diupload ke variabel $file
+            $file = $request->file('poto');
+            
+            $poto = time()."_".$file->getClientOriginalName();
+            $tujuan_upload = 'public/img/siswa';
+            // isi dengan nama folder tempat kemana file diupload
+            $file->move($tujuan_upload,$poto);
+        } else {
+            $poto   = NULL;
+        }
+    
+        // simpan client
+        Siswa::create([
+            'nama_siswa' => $request->nama_siswa,
+            'alamat' => $request->alamat,
+            'no_telp' => $request->no_telp,
+            'jk' => $request->jk,
+            'agama' => $request->agama,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'tempat_lahir' => $request->tempat_lahir,
+            'nisn' => $request->nisn,
+            'nipd' => $request->nipd,
+            'tahun_masuk' => $request->tahun_masuk,
+            'status' => 'aktif',
+            'poto' => $poto,
+        ]);
+
+        return redirect('siswa')->with('ds','Client');
     }
 
     /**
