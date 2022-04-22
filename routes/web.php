@@ -7,9 +7,10 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Homepage\LandingController;
+use App\Http\Controllers\Sekolah\PegawaiController;
+use App\Http\Controllers\Sekolah\SiswaController;
 use App\Http\Controllers\Sistem\UserController;
 use App\Http\Controllers\Sistem\VisitorController;
-use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -49,8 +50,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('galeri', GaleriController::class);
         Route::resource('sarana', SaranaController::class);
         
-        // PERCOBAAN
+        // SEKOLAH
         Route::resource('siswa', SiswaController::class);
+        Route::resource('pegawai', PegawaiController::class);
     });
 
     Route::resource('user', UserController::class);
