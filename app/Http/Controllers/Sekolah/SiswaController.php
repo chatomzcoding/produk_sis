@@ -69,6 +69,7 @@ class SiswaController extends Controller
         Siswa::create([
             'nama_siswa' => $request->nama_siswa,
             'alamat' => $request->alamat,
+            'email' => $request->email,
             'no_telp' => $request->no_telp,
             'jk' => $request->jk,
             'agama' => $request->agama,
@@ -83,7 +84,7 @@ class SiswaController extends Controller
             'poto' => $poto,
         ]);
 
-        return redirect('siswa')->with('ds','Client');
+        return redirect('siswa')->with('ds','Siswa');
     }
 
     /**
