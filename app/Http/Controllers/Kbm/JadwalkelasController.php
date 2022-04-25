@@ -36,7 +36,13 @@ class JadwalkelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Jadwalkelas::create([
+            'kelas_id' => $request->kelas_id,
+            'jadwalpelajaran_id' => $request->jadwalpelajaran_id,
+            'hari' => $request->hari,
+            'jam' => $request->jam_awal.'-'.$request->jam_akhir,
+        ]);
+        return back()->with('ds','Jadwal kelas');
     }
 
     /**
@@ -79,8 +85,12 @@ class JadwalkelasController extends Controller
      * @param  \App\Models\Jadwalkelas  $jadwalkelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jadwalkelas $jadwalkelas)
+
+    public function destroy($jadwalkelas)
     {
-        //
+        Jadwalkelas::find($jadwalkelas)->delete();
+
+        return back()->with('dd','Jadwal kelas');
+
     }
 }

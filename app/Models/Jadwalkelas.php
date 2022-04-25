@@ -12,4 +12,9 @@ class Jadwalkelas extends Model
     protected $table = 'jadwal_kelas';
 
     protected $guarded = [];
+
+    public function jadwalpelajaran()
+    {
+        return $this->belongsTo(Jadwalpelajaran::class);
+    }
 }

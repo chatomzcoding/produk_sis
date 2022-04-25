@@ -13,4 +13,8 @@ class Kelas extends Model
 
     protected $guarded = [];
 
+    public function jadwalkelas()
+    {
+        return $this->hasMany(Jadwalkelas::class);
+    }
 }

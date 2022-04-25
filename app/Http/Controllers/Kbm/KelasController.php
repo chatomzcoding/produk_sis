@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Kbm;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jadwalkelas;
+use App\Models\Jadwalpelajaran;
 use App\Models\Kelas;
+use App\Models\Matapelajaran;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -48,9 +51,26 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Kelas $kelas)
+    public function show($kelas)
     {
-        //
+        $kelas = Kelas::find($kelas);
+        $jadwalpelajaran    = Jadwalpelajaran::all();
+        $informasi      = [];
+        foreach (sis_namahari() as $key) {
+            $jadwal     = [];
+            $jadwalkelas = Jadwalkelas::where('hari',$key)->orderBy('jam')->get();
+            foreach ($jadwalkelas as $row) {
+                $pelajaran  = Matapelajaran::find($row->jadwalpelajaran->matapelajaran_id);
+                $jadwal[]   = $pelajaran->nama_pelajaran; 
+            }
+            $informasi[] = [
+                'hari' => strtoupper($key),
+                'jadwal' => $jadwal,
+            ];
+        }
+        $jadwalkelas        = Jadwalkelas::where('kelas_id',$kelas->id)->get();
+
+        return view('kbm.kelas.show', compact('kelas','jadwalpelajaran','jadwalkelas','informasi'));
     }
 
     /**

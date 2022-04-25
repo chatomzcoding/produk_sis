@@ -29,25 +29,29 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="10%">Aksi</th>
-                                    <th>Nama Kelas</th>
+                                    <th>Nama Mata Pelajaran</th>
+                                    <th>Hari</th>
+                                    <th>Jam</th>
                                 </tr>
                             </thead>
                             <tbody class="text-capitalize">
-                                @forelse ($kelas as $item)
+                                @forelse ($jadwalkelas as $item)
                                 <tr>
                                         <td class="text-center">{{ $loop->iteration}}</td>
                                         <td class="text-center">
-                                            <x-aksi :id="$item->id" link="kelas/{{ $item->id}}">
+                                            <x-aksi :id="$item->id" link="jadwalkelas/{{ $item->id}}">
                                                 <a href="{{ url('kelas/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file" style="width: 25px"></i> DETAIL</a>
                                                 <button type="button" data-toggle="modal" data-nama_kelas="{{ $item->nama_kelas }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                 </button>
                                             </x-aksi>
                                         </td>
-                                        <td>{{ $item->nama_kelas}}</td>
+                                        <td>{{ DbSekolah::namaPelajaranId($item->jadwalpelajaran->matapelajaran_id)->nama_pelajaran}}</td>
+                                        <td class="text-center text-uppercase">{{ $item->hari}}</td>
+                                        <td class="text-center">{{ $item->jam}}</td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="3" class="font-italic">-- belum ada data --</td>
+                                        <td colspan="5" class="font-italic">-- belum ada data --</td>
                                     </tr>
                                 @endforelse
                         </table>
@@ -56,15 +60,45 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-header">
+                        <h4>INFORMASI JADWAL PELAJARAN KELAS {{ $kelas->nama_kelas }}</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                          @foreach ($informasi as $item)
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header text-center bg-info p-2">
+                                        <strong>{{ $item['hari'] }}</strong>
+                                    </div>
+                                    <div class="card-body text-center">
+                                        @forelse ($item['jadwal'] as $row)
+                                            <strong>{{ $row }}</strong> <br>
+                                        @empty
+                                            <i>belum ada data</i>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                          @endforeach
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
         
         <div class="modal fade" id="tambah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ url('kelas')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('jadwalkelas')}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="kelas_id" value="{{ $kelas->id }}">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Kelas</h4>
+                    <h4 class="modal-title">Tambah Data Jadwal Kelas</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -72,9 +106,41 @@
                 <div class="modal-body p-3">
                     <section class="p-3">
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Kelas {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <input type="text" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}" class="form-control" required>
+                                <select name="jadwalpelajaran_id" id="jadwalpelajaran_id" class="form-control select2" required>
+                                    <option value="">-- pilih mata pelajaran --</option>
+                                    @foreach ($jadwalpelajaran as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->matapelajaran->nama_pelajaran.' || '.$item->pegawai->nama_pegawai) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Hari Pelajaran {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="hari" id="hari" class="form-control" required>
+                                    <option value="">-- pilih hari --</option>
+                                    @foreach (sis_namahari() as $item)
+                                        <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Jam Pelajaran {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <input type="time" name="jam_awal" id="jam_awal" value="{{ old('jam_awal') }}" class="form-control" required>
+                                        </td>
+                                        <td>s/d</td>
+                                        <td>
+                                            <input type="time" name="jam_akhir" id="jam_akhir" value="{{ old('jam_akhir') }}" class="form-control" required>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </section>
@@ -90,7 +156,7 @@
         <div class="modal fade" id="ubah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ route('kelas'.'.update','test')}}" method="post">
+                <form action="{{ route('jadwalkelas'.'.update','test')}}" method="post">
                     @csrf
                     @method('patch')
                 <div class="modal-header">
