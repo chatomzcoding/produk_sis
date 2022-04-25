@@ -21,17 +21,16 @@
                         <a href="{{ url('pegawai') }}" class="btn btn-outline-secondary btn-sm pop-info" title="Kembali ke daftar pegawai"><i class="fas fa-angle-left"></i> Kembali</a>
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
                       <form action="{{ url('pegawai') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <section class="p-3">
                             <div class="form-group row">
                                 <label for="" class="col-md-4 p-2">Nomor Identitas Pegawai</label>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nip" id="nip" maxlength="20" value="{{ old('nip') }}" placeholder="NISN" class="form-control" required>
+                                    <input type="text" name="nip" id="nip" maxlength="20" value="{{ old('nip') }}" placeholder="NIP" class="form-control" required>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nuptk" id="nuptk" maxlength="20" value="{{ old('nuptk') }}"  placeholder="NIPD" class="form-control" required>
+                                    <input type="text" name="nuptk" id="nuptk" maxlength="20" value="{{ old('nuptk') }}"  placeholder="NUPTK" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -50,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 p-2">Alamat Siswa {!! ireq() !!}</label>
+                                <label for="" class="col-md-4 p-2">Alamat Pegawai {!! ireq() !!}</label>
                                 <div class="col-md-8 p-0">
                                     <input type="text" name="alamat" id="alamat" value="{{ old('alamat') }}" class="form-control" required>
                                 </div>
@@ -89,7 +88,7 @@
                                     <select name="agama" id="agama" class="form-control" required>
                                         <option value="">-- pilih agama --</option>
                                         @foreach (list_agama() as $item)
-                                            <option value="{{ $item }}">{{ $item }}</option>
+                                            <option value="{{ $item }}">{{ strtoupper($item) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
