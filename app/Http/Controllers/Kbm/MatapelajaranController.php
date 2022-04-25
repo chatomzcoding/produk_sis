@@ -15,7 +15,7 @@ class MatapelajaranController extends Controller
      */
     public function index()
     {
-        $matapelajaran = Matapelajaran::all();
+        $matapelajaran = Matapelajaran::orderBy('nama_pelajaran','ASC')->get();
 
         return view('kbm.matapelajaran.index', compact('matapelajaran'));
     }

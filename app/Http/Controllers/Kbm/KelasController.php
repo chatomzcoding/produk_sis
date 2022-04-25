@@ -58,7 +58,7 @@ class KelasController extends Controller
         $informasi      = [];
         foreach (sis_namahari() as $key) {
             $jadwal     = [];
-            $jadwalkelas = Jadwalkelas::where('hari',$key)->orderBy('jam')->get();
+            $jadwalkelas = Jadwalkelas::where('kelas_id',$kelas->id)->where('hari',$key)->orderBy('jam')->get();
             foreach ($jadwalkelas as $row) {
                 $pelajaran  = Matapelajaran::find($row->jadwalpelajaran->matapelajaran_id);
                 $jadwal[]   = $pelajaran->nama_pelajaran; 
