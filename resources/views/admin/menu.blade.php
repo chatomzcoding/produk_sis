@@ -38,6 +38,12 @@
           <p>Mata Pelajaran</p>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{{ url('/jadwalpelajaran')}}" class="nav-link">
+          &nbsp;&nbsp;<i class="fas fa-list nav-icon"></i>
+          <p>Jadwal Pelajaran</p>
+        </a>
+      </li>
     </ul>
 </li>
 <li class="nav-item">

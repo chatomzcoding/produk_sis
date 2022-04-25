@@ -3,11 +3,13 @@
         <div class="row mb-2">
             <div class="col-sm-6">
             <h1 class="m-0">Data Kelas</h1>
+            <p>{{ $kelas->nama_kelas }}</p>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-                <li class="breadcrumb-item active">Daftar Kelas</li>
+                <li class="breadcrumb-item"><a href="{{ url('kelas')}}">Daftar Kelas</a></li>
+                <li class="breadcrumb-item active">Detail Kelas</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -21,7 +23,6 @@
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Kelas Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
                       <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="text-center">

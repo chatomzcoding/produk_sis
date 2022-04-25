@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Homepage\LandingController;
+use App\Http\Controllers\Kbm\JadwalkelasController;
+use App\Http\Controllers\Kbm\JadwalpelajaranController;
 use App\Http\Controllers\Kbm\KbmController;
 use App\Http\Controllers\Kbm\KelasController;
 use App\Http\Controllers\Kbm\MatapelajaranController;
@@ -63,6 +65,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('tahunajaran', TahunajaranController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('matapelajaran', MatapelajaranController::class);
+        Route::resource('jadwalpelajaran', JadwalpelajaranController::class);
+        Route::resource('jadwalkelas', JadwalkelasController::class);
 
     });
 
