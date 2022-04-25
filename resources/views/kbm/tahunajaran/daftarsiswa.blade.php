@@ -22,7 +22,9 @@
                 <div class="card">
                   <div class="card-header">
                         <x-ui.tombolkembali url="tahunajaran/{{ $tahunajaran->id }}"></x-ui.tombolkembali>
-                        <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Tahun Ajaran Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
+                        @if (count($siswa) > 0)
+                            <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Tahun Ajaran Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
+                        @endif
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">

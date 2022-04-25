@@ -60,7 +60,16 @@ class TahunajaranController extends Controller
                 $kelas_id = $_GET['kelas_id'];
                 $kelas  = Kelas::find($kelas_id);
                 $kbm    = Kbm::where('kelas_id',$kelas_id)->where('tahunajaran_id',$tahunajaran->id)->get();
-                $siswa  = Siswa::where('status','aktif')->orderBy('nama_siswa','ASC')->get();
+                // list siswa
+                $siswa  = [];
+                $datasiswa  = Siswa::where('status','aktif')->orderBy('nama_siswa','ASC')->get();
+                foreach ($datasiswa as $key) {
+                    // cek apakah siswa sudah dimasukkan kedalam kelas atau belum
+                    $ceksiswa = Kbm::where('tahunajaran_id',$tahunajaran->id)->where('siswa_id',$key->id)->first();
+                    if (!$ceksiswa) {
+                        $siswa[] = $key;
+                    }
+                }
                 return view('kbm.tahunajaran.daftarsiswa', compact('kelas','kbm','tahunajaran','siswa'));
                 break;
             
