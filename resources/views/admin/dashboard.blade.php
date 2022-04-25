@@ -23,7 +23,7 @@
             <div class="info-box-content">
               <span class="info-box-text">Jumlah Tenaga Pengajar</span>
               <span class="info-box-number">
-                23
+                {{ $main['statistik']['pengajar'] }}
                 {{-- <small>%</small> --}}
               </span>
             </div>
@@ -38,7 +38,7 @@
     
             <div class="info-box-content">
               <span class="info-box-text">Jumlah Siswa</span>
-              <span class="info-box-number">780</span>
+              <span class="info-box-number">{{ $main['statistik']['siswa'] }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -55,7 +55,7 @@
     
             <div class="info-box-content">
               <span class="info-box-text">Jumlah Inventaris</span>
-              <span class="info-box-number">120</span>
+              <span class="info-box-number">{{ $main['statistik']['inventaris'] }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -68,7 +68,7 @@
     
             <div class="info-box-content">
               <span class="info-box-text">Total Pengunjung</span>
-              <span class="info-box-number">4.500</span>
+              <span class="info-box-number">{{ $main['statistik']['pengunjung'] }}</span>
             </div>
             <!-- /.info-box-content -->
           </div>

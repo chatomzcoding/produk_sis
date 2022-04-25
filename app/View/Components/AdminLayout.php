@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use App\Models\Infowebsite;
+use App\Models\Tahunajaran;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
@@ -31,6 +32,7 @@ class AdminLayout extends Component
     {
         $user       = Auth::user();
         $datapokok  = Infowebsite::first();
-        return view('components.admin-layout', compact('user','datapokok'));
+        $tahunajaran    = Tahunajaran::where('status_tahun_ajaran','aktif')->first();
+        return view('components.admin-layout', compact('user','datapokok','tahunajaran'));
     }
 }

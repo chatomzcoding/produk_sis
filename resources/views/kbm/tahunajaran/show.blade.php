@@ -29,8 +29,7 @@
                                     <div class="card">
                                         <div class="card-body">
                                         <h2>Kelas {{ $item->nama_kelas }}</h2>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="{{ url('tahunajaran/'.$tahunajaran->id.'?sesi=daftarsiswa&kelas_id='.$item->id) }}" class="card-link">Daftar Siswa</a>
+                                        <a href="{{ url('tahunajaran/'.$tahunajaran->id.'?sesi=daftarsiswa&kelas_id='.$item->id) }}" class="card-link">Daftar Siswa ({{ DbSekolah::jumlahSiswaKelasPerTahunAjaran($tahunajaran->id,$item->id) }})</a>
                                         {{-- <a href="#" class="card-link">Another link</a> --}}
                                         </div>
                                     </div>

@@ -231,9 +231,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DbSistem' => App\Http\Helpers\Custom\DbSistem::class,
+        'DbSekolah' => App\Http\Helpers\Sekolah\DbSekolah::class,
         'PDF' => \Barryvdh\DomPDF\Facade::class,
-
-
     ],
 
 ];

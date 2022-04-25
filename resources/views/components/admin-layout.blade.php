@@ -58,6 +58,11 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
+      @if ($tahunajaran)
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="{{ url('tahunajaran/'.$tahunajaran->id) }}" class="nav-link text-info font-weight-bold">{{ $tahunajaran->nama_tahun_ajaran }}</a>
+        </li>
+        @endif
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ url('/') }}" target="_blank" class="nav-link">Halaman Depan</a>
       </li>
