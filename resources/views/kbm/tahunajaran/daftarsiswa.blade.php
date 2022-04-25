@@ -3,11 +3,14 @@
         <div class="row mb-2">
             <div class="col-sm-6">
             <h1 class="m-0">Data Tahun Ajaran</h1>
+            <p>{{ $tahunajaran->nama_tahun_ajaran.' - '.$kelas->nama_kelas }}</p>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-                <li class="breadcrumb-item active">Daftar Tahun Ajaran</li>
+                <li class="breadcrumb-item"><a href="{{ url('tahunajaran')}}">Daftar Tahun Ajaran</a></li>
+                <li class="breadcrumb-item"><a href="{{ url('tahunajaran/'.$tahunajaran->id)}}">{{ $tahunajaran->nama_tahun_ajaran }}</a></li>
+                <li class="breadcrumb-item active">Daftar Siswa</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -18,19 +21,8 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
+                        <x-ui.tombolkembali url="tahunajaran/{{ $tahunajaran->id }}"></x-ui.tombolkembali>
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Tahun Ajaran Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
-                        {{-- <div class="float-right">
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="dropdown-item pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print" style="width: 25px"></i> CETAK</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button data-toggle="modal" data-target="#info" title="Informasi" class="dropdown-item" type="button"><i class="fas fa-info text-center" style="width: 25px"></i> INFO</button>
-                                </div>
-                            </div>
-                        </div> --}}
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
@@ -39,15 +31,16 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="10%">Aksi</th>
-                                    <th>Nama Tahun Ajaran</th>
+                                    <th>Nomor identitas (NISN/NIPD)</th>
+                                    <th>Nama Siswa</th>
                                 </tr>
                             </thead>
                             <tbody class="text-capitalize">
-                                @forelse ($tahunajaran as $item)
+                                @forelse ($kbm as $item)
                                 <tr>
                                         <td class="text-center">{{ $loop->iteration}}</td>
                                         <td class="text-center">
-                                            <form id="data-{{ $item->id }}" action="{{url('tahunajaran'.'/'.$item->id)}}" method="post">
+                                            <form id="data-{{ $item->id }}" action="{{url('kbm'.'/'.$item->id)}}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 </form>
@@ -57,19 +50,20 @@
                                                       <span class="sr-only">Toggle Dropdown</span>
                                                     </button>
                                                     <div class="dropdown-menu" role="menu">
-                                                        <a href="{{ url('tahunajaran/'.$item->id) }}" class="dropdown-item" ><i class="fas fa-list text-info" style="width: 25px"></i> DETAIL</a>
-                                                        <button type="button" data-toggle="modal" data-nama="{{ $item->nama_tahun_ajaran }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
+                                                        <a href="{{ url('siswa/'.$item->id) }}" class="dropdown-item" ><i class="fas fa-list text-info" style="width: 25px"></i> DETAIL SISWA</a>
+                                                        {{-- <button type="button" data-toggle="modal" data-nama="{{ $item->nama_tahun_ajaran }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT --}}
                                                         </button>
                                                       <div class="dropdown-divider"></div>
                                                       <button onclick="deleteRow( {{ $item->id }} )" class="dropdown-item"><i class="fas fa-trash-alt text-danger" style="width: 25px"></i> HAPUS</button>
                                                     </div>
                                                 </div>
                                         </td>
-                                        <td>{{ $item->nama_tahun_ajaran}}</td>
+                                        <td>{{ $item->siswa->nisn.' / '.$item->siswa->nipd}}</td>
+                                        <td class="text-capitalize">{{ $item->siswa->nama_siswa}}</td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="3" class="font-italic">-- belum ada data --</td>
+                                        <td colspan="4" class="font-italic">-- belum ada data --</td>
                                     </tr>
                                 @endforelse
                         </table>
@@ -83,10 +77,13 @@
         <div class="modal fade" id="tambah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ url('tahunajaran')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('kbm')}}" method="post">
                     @csrf
+                    <input type="hidden" name="kelas_id" value="{{ $kelas->id }}">
+                    <input type="hidden" name="status_kbm" value="aktif">
+                    <input type="hidden" name="tahunajaran_id" value="{{ $tahunajaran->id }}">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Tahun Ajaran Baru</h4>
+                    <h4 class="modal-title">Tambah Siswa</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -94,22 +91,16 @@
                 <div class="modal-body p-3">
                     <section class="p-3">
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Tahun Ajaran {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Nama Siswa {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <input type="text" name="nama_tahun_ajaran" id="nama_tahun_ajaran" value="{{ old('nama_tahun_ajaran') }}" class="form-control" required>
-                            </div>
-                        </div>
-                        {{-- <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Kategori {!! ireq() !!}</label>
-                            <div class="col-md-8 p-0">
-                                <select name="kategori_id" id="kategori_id" class="form-control" required>
-                                    <option value="">-- pilih Kategori --</option>
-                                    @foreach ($kategori as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                <select name="siswa_id" id="siswa_id" class="form-control select2" required>
+                                    <option value="">-- Cari Siswa/NISN --</option>
+                                    @foreach ($siswa as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_siswa.' || '.$item->nisn) }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
                     </section>
                 </div>
                 <div class="modal-footer justify-content-between">

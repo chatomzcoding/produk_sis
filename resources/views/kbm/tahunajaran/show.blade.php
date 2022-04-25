@@ -2,12 +2,13 @@
     <x-slot name="header">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Data Tahun Ajaran</h1>
+            <h1 class="m-0">Data Tahun Ajaran {{ $tahunajaran->nama_tahun_ajaran }}</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-                <li class="breadcrumb-item active">Daftar Tahun Ajaran</li>
+                <li class="breadcrumb-item"><a href="{{ url('tahunajaran')}}">Daftah Tahun Ajaran</a></li>
+                <li class="breadcrumb-item active">Detail</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -18,62 +19,28 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
+                        <x-ui.tombolkembali url="tahunajaran"></x-ui.tombolkembali>
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Tahun Ajaran Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
-                        {{-- <div class="float-right">
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="dropdown-item pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print" style="width: 25px"></i> CETAK</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button data-toggle="modal" data-target="#info" title="Informasi" class="dropdown-item" type="button"><i class="fas fa-info text-center" style="width: 25px"></i> INFO</button>
-                                </div>
-                            </div>
-                        </div> --}}
                   </div>
                   <div class="card-body">
-                      <div class="table-responsive">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <thead class="text-center">
-                                <tr>
-                                    <th width="5%">No</th>
-                                    <th width="10%">Aksi</th>
-                                    <th>Nama Tahun Ajaran</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-capitalize">
-                                @forelse ($tahunajaran as $item)
-                                <tr>
-                                        <td class="text-center">{{ $loop->iteration}}</td>
-                                        <td class="text-center">
-                                            <form id="data-{{ $item->id }}" action="{{url('tahunajaran'.'/'.$item->id)}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                </form>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-sm btn-flat">Aksi</button>
-                                                    <button type="button" class="btn btn-info btn-sm btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                                      <span class="sr-only">Toggle Dropdown</span>
-                                                    </button>
-                                                    <div class="dropdown-menu" role="menu">
-                                                        <a href="{{ url('tahunajaran/'.$item->id) }}" class="dropdown-item" ><i class="fas fa-list text-info" style="width: 25px"></i> DETAIL</a>
-                                                        <button type="button" data-toggle="modal" data-nama="{{ $item->nama_tahun_ajaran }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
-                                                        </button>
-                                                      <div class="dropdown-divider"></div>
-                                                      <button onclick="deleteRow( {{ $item->id }} )" class="dropdown-item"><i class="fas fa-trash-alt text-danger" style="width: 25px"></i> HAPUS</button>
-                                                    </div>
-                                                </div>
-                                        </td>
-                                        <td>{{ $item->nama_tahun_ajaran}}</td>
-                                    </tr>
-                                @empty
-                                    <tr class="text-center">
-                                        <td colspan="3" class="font-italic">-- belum ada data --</td>
-                                    </tr>
-                                @endforelse
-                        </table>
-                    </div>
+                      <div class="row">
+                          @forelse ($kelas as $item)
+                            <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                        <h2>Kelas {{ $item->nama_kelas }}</h2>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="{{ url('tahunajaran/'.$tahunajaran->id.'?sesi=daftarsiswa&kelas_id='.$item->id) }}" class="card-link">Daftar Siswa</a>
+                                        {{-- <a href="#" class="card-link">Another link</a> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @empty
+                                <section class="col">
+                                    Data Kelas belum ada
+                                </section>
+                            @endforelse
+                      </div>
                   </div>
                 </div>
               </div>

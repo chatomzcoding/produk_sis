@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Homepage\LandingController;
+use App\Http\Controllers\Kbm\KbmController;
 use App\Http\Controllers\Kbm\KelasController;
 use App\Http\Controllers\Kbm\MatapelajaranController;
 use App\Http\Controllers\Kbm\TahunajaranController;
@@ -58,6 +59,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('pegawai', PegawaiController::class);
         
         // KBM
+        Route::resource('kbm', KbmController::class);
         Route::resource('tahunajaran', TahunajaranController::class);
         Route::resource('kelas', KelasController::class);
         Route::resource('matapelajaran', MatapelajaranController::class);

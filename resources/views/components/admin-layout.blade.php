@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('template/admin/lte/dist/css/adminlte.min.css')}}">
   <!-- overlayScrollbars -->
@@ -35,7 +38,7 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}"> --}}
 
     <script src="{{ asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert2.css')}}"></script>
@@ -242,6 +245,7 @@
     </div>
       <!-- /.content-header -->
         <section class="content">
+          @include('sistem.notifikasi')
           {{ $content }}
         </section>
   </div>
@@ -273,6 +277,8 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('template/admin/lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Select2 -->
+<script src="{{ asset('template/admin/lte/plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- ChartJS -->
 <script src="{{ asset('template/admin/lte/plugins/chart.js/Chart.min.js')}}"></script>
 <!-- Sparkline -->
@@ -300,12 +306,21 @@
 <script src="{{ asset('template/admin/lte/plugins/pdfmake/vfs_fonts.js')}}"></script>
 <script src="{{ asset('template/admin/lte/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('template/admin/lte/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{ asset('vendor/select2/dist/js/select2.min.js')}}"></script>
 
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('template/admin/lte/dist/js/demo.js')}}"></script>
+{{-- <script src="{{ asset('template/admin/lte/dist/js/demo.js')}}"></script> --}}
 
 {{-- javascript chatomz --}}
 <script src="{{ asset('/js/chatomz.js')}}"></script>
+
+<script type="text/javascript">
+ //Initialize Select2 Elements
+ $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+ })
+</script>
 
 {{ $kodejs ?? ''}}
 @stack('modals')
