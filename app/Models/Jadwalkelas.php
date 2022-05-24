@@ -17,4 +17,9 @@ class Jadwalkelas extends Model
     {
         return $this->belongsTo(Jadwalpelajaran::class);
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 }

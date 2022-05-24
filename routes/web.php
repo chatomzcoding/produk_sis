@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\InfowebsiteController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\Guru\HomeController as GuruHomeController;
 use App\Http\Controllers\Homepage\LandingController;
 use App\Http\Controllers\Kbm\JadwalkelasController;
 use App\Http\Controllers\Kbm\JadwalpelajaranController;
@@ -47,9 +48,20 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // akses siswa
     Route::get('homesiswa/biodata/{id}',[HomeController::class,'biodata']);
     Route::get('homesiswa/jadwal/{id}',[HomeController::class,'jadwal']);
+    // akses guru
+    Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
 
     Route::resource('siswa', SiswaController::class);
     Route::resource('aksessiswa', AksessiswaController::class);
+
+      // KBM
+      Route::resource('kbm', KbmController::class);
+      Route::resource('tahunajaran', TahunajaranController::class);
+      Route::resource('kelas', KelasController::class);
+      Route::resource('matapelajaran', MatapelajaranController::class);
+      Route::resource('jadwalpelajaran', JadwalpelajaranController::class);
+      Route::resource('jadwalkelas', JadwalkelasController::class);
+      
     // Route Admin
     Route::middleware(['admin'])->group(function () {
         // simpan route admin dibawah ini
@@ -68,13 +80,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('pegawai', PegawaiController::class);
         Route::resource('aksespegawai', AksespegawaiController::class);
         
-        // KBM
-        Route::resource('kbm', KbmController::class);
-        Route::resource('tahunajaran', TahunajaranController::class);
-        Route::resource('kelas', KelasController::class);
-        Route::resource('matapelajaran', MatapelajaranController::class);
-        Route::resource('jadwalpelajaran', JadwalpelajaranController::class);
-        Route::resource('jadwalkelas', JadwalkelasController::class);
+      
 
     });
 

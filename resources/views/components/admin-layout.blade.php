@@ -154,7 +154,13 @@
           <img src="{{ asset(sistem_cekuserphoto($user->photo))}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info text-white pt-0">
-          <span href="#" class="d-block text-capitalize">{{ $user->name}} <br> <small>{{ $user->level }}</small></span> 
+          <span href="#" class="d-block text-capitalize">{{ $user->name}} <br> <small>{{ $user->level }} 
+          @isset($user->aksespegawai)
+            @if ($user->aksespegawai->akses <> 'tidak ada')
+            / {{ $user->aksespegawai->akses }}
+            @endif
+          @endisset
+          </small></span> 
         </div>
       </div>
 

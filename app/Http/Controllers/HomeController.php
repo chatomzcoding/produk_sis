@@ -17,6 +17,9 @@ class HomeController extends Controller
             case 'siswa':
                 return view('siswa.dashboard');
                 break;
+            case 'guru':
+                return view('guru.dashboard');
+                break;
             case 'admin':
                 $statistik = [
                     'pengajar' => Pegawai::count(),

@@ -15,6 +15,6 @@ class Kelas extends Model
 
     public function jadwalkelas()
     {
-        return $this->hasMany(Jadwalkelas::class);
+        return $this->hasMany(Jadwalkelas::class)->orderBy('jam','ASC');
     }
 }

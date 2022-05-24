@@ -22,4 +22,9 @@ class Jadwalpelajaran extends Model
     {
         return $this->belongsTo(Matapelajaran::class);
     }
+
+    public function jadwalkelas()
+    {
+        return $this->hasMany(Jadwalkelas::class);
+    }
 }

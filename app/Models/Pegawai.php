@@ -17,4 +17,9 @@ class Pegawai extends Model
     {
         return $this->hasOne(Aksespegawai::class);
     }
+
+    public function jadwalpelajaran()
+    {
+        return $this->hasMany(Jadwalpelajaran::class);
+    }
 }

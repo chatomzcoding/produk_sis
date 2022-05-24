@@ -18,33 +18,40 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                       JADWAL PELAJARAN Kelas {{ $siswa->kbm->kelas->nama_kelas }}
+                       JADWAL MENGAJAR
                   </div>
                   <div class="card-body">
-                     <div class="row">
-                        @foreach ($jadwal as $hari => $item)
-                            <div class="col-md-4 p-3">
+                      @foreach ($pegawai->jadwalpelajaran as $item)
+                        <div class="row">
+                           <div class="col-md-4">
                                 <div class="card">
-                                    <div class="card-header text-center bg-info">
-                                        <strong class="text-uppercase">{{ $hari }}</strong>
+                                    <div class="card-header">
+                                        <strong>{{ $item->matapelajaran->nama_pelajaran }}</strong>
                                     </div>
-                                    <div class="card-body">
+                                </div>
+                           </div>
+                           <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-body p-2">
                                         <table class="table table-borderless">
-                                            @foreach ($item as $i)
                                             <tr>
-                                                <th>{{ $i->jam }}</th>
-                                                <td>
-                                                    {{ $i->jadwalpelajaran->matapelajaran->nama_pelajaran }} <br>
-                                                    <small class="text-capitalize">{{ $i->jadwalpelajaran->pegawai->nama_pegawai }}</small>
-                                                </td>
+                                                <th>HARI</th>
+                                                <th>JAM</th>
+                                                <th>KELAS</th>
                                             </tr>
+                                            @foreach ($item->jadwalkelas as $key)
+                                                <tr>
+                                                    <td>{{ $key->hari }}</td>
+                                                    <td>{{ $key->jam }}</td>
+                                                    <td>{{ $key->kelas->nama_kelas }}</td>
+                                                </tr>
                                             @endforeach
                                         </table>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-                     </div>
+                           </div>
+                        </div>
+                      @endforeach
                   </div>
                 </div>
               </div>
