@@ -12,4 +12,14 @@ class Matapelajaran extends Model
     protected $table = 'mata_pelajaran';
 
     protected $guarded = [];
+
+    public function jadwalpelajaran()
+    {
+        return $this->hasOne(Jadwalpelajaran::class);
+    }
+
+    public function ujian()
+    {
+        return $this->hasMany(Ujian::class);
+    }
 }

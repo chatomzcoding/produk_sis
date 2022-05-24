@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Kbm;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
-use App\Models\Matapelajaran;
+use App\Models\Soal;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 
-class MatapelajaranController extends Controller
+class SoalController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +16,7 @@ class MatapelajaranController extends Controller
      */
     public function index()
     {
-        $matapelajaran = Matapelajaran::orderBy('nama_pelajaran','ASC')->get();
-
-        return view('kbm.matapelajaran.index', compact('matapelajaran'));
+        //
     }
 
     /**
@@ -27,7 +26,9 @@ class MatapelajaranController extends Controller
      */
     public function create()
     {
-        //
+        $ujian  = Ujian::find($_GET['id']);
+
+        return view('guru.soal.create', compact('ujian'));
     }
 
     /**
@@ -38,29 +39,38 @@ class MatapelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        Matapelajaran::create($request->all());
+        $soal   = [
+            'isi' => $request->soal,
+            'pilihan' => $request->pilihan
+        ];
 
-        return back()->with('ds','Mata Pelajaran');
+        Soal::create([
+            'ujian_id' => $request->ujian_id,
+            'soal' => json_encode($soal),
+            'jawaban' => $request->jawaban
+        ]);
+
+        return back()->with('ds','Soal');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Soal  $soal
      * @return \Illuminate\Http\Response
      */
-    public function show(Matapelajaran $matapelajaran)
+    public function show(Soal $soal)
     {
-        return view('kbm.matapelajaran.show', compact('matapelajaran'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Soal  $soal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Matapelajaran $matapelajaran)
+    public function edit(Soal $soal)
     {
         //
     }
@@ -69,25 +79,21 @@ class MatapelajaranController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Soal  $soal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Soal $soal)
     {
-        Matapelajaran::where('id',$request->id)->update([
-            'nama_pelajaran' => $request->nama_pelajaran
-        ]);
-        
-        return back()->with('ds','Mata Pelajaran');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Soal  $soal
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matapelajaran $matapelajaran)
+    public function destroy(Soal $soal)
     {
         //
     }

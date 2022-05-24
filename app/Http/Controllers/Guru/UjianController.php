@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Kbm;
+namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
-use App\Models\Matapelajaran;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 
-class MatapelajaranController extends Controller
+class UjianController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class MatapelajaranController extends Controller
      */
     public function index()
     {
-        $matapelajaran = Matapelajaran::orderBy('nama_pelajaran','ASC')->get();
-
-        return view('kbm.matapelajaran.index', compact('matapelajaran'));
+        //
     }
 
     /**
@@ -38,29 +36,29 @@ class MatapelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        Matapelajaran::create($request->all());
+        Ujian::create($request->all());
 
-        return back()->with('ds','Mata Pelajaran');
+        return back()->with('ds','Ujian');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function show(Matapelajaran $matapelajaran)
+    public function show(Ujian $ujian)
     {
-        return view('kbm.matapelajaran.show', compact('matapelajaran'));
+        return view('guru.ujian.show', compact('ujian'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function edit(Matapelajaran $matapelajaran)
+    public function edit(Ujian $ujian)
     {
         //
     }
@@ -69,25 +67,21 @@ class MatapelajaranController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, Ujian $ujian)
     {
-        Matapelajaran::where('id',$request->id)->update([
-            'nama_pelajaran' => $request->nama_pelajaran
-        ]);
-        
-        return back()->with('ds','Mata Pelajaran');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Matapelajaran  $matapelajaran
+     * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Matapelajaran $matapelajaran)
+    public function destroy(Ujian $ujian)
     {
         //
     }

@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Guru\HomeController as GuruHomeController;
+use App\Http\Controllers\Guru\SoalController;
+use App\Http\Controllers\Guru\UjianController;
 use App\Http\Controllers\Homepage\LandingController;
 use App\Http\Controllers\Kbm\JadwalkelasController;
 use App\Http\Controllers\Kbm\JadwalpelajaranController;
@@ -50,6 +52,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('homesiswa/jadwal/{id}',[HomeController::class,'jadwal']);
     // akses guru
     Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
+    Route::resource('ujian', UjianController::class);
+    Route::resource('soal', SoalController::class);
 
     Route::resource('siswa', SiswaController::class);
     Route::resource('aksessiswa', AksessiswaController::class);
