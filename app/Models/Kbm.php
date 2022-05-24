@@ -18,4 +18,9 @@ class Kbm extends Model
     {
         return $this->belongsTo(Siswa::class);
     }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
 }

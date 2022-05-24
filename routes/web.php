@@ -19,6 +19,7 @@ use App\Http\Controllers\Sekolah\PegawaiController;
 use App\Http\Controllers\Sekolah\SiswaController;
 use App\Http\Controllers\Sistem\UserController;
 use App\Http\Controllers\Sistem\VisitorController;
+use App\Http\Controllers\Siswa\HomeController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::get('/demo',[DemoController::class,'index']);
 
+    // akses siswa
+    Route::get('homesiswa/biodata/{id}',[HomeController::class,'biodata']);
+    Route::get('homesiswa/jadwal/{id}',[HomeController::class,'jadwal']);
 
     Route::resource('siswa', SiswaController::class);
     Route::resource('aksessiswa', AksessiswaController::class);

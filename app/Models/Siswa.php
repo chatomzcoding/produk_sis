@@ -17,4 +17,9 @@ class Siswa extends Model
     {
         return $this->hasOne(Aksessiswa::class);
     }
+
+    public function kbm()
+    {
+        return $this->hasOne(Kbm::class)->orderBy('id','DESC');
+    }
 }

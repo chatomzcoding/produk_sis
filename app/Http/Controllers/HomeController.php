@@ -12,16 +12,27 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $menu   = 'dashboard';
-        $statistik = [
-            'pengajar' => Pegawai::count(),
-            'siswa' => Siswa::count(),
-            'inventaris' => 10,
-            'pengunjung' => 1200
-        ];
-        $main   = [
-            'statistik' => $statistik
-        ];
-        return view('admin.dashboard', compact('menu','main'));
+        $user   = Auth::user();
+        switch ($user->level) {
+            case 'siswa':
+                return view('siswa.dashboard');
+                break;
+            case 'admin':
+                $statistik = [
+                    'pengajar' => Pegawai::count(),
+                    'siswa' => Siswa::count(),
+                    'inventaris' => 10,
+                    'pengunjung' => 1200
+                ];
+                $main   = [
+                    'statistik' => $statistik
+                ];
+                return view('admin.dashboard', compact('main'));
+                break;
+            
+            default:
+                die('akses ditolak');
+                break;
+        }
     }
 }
