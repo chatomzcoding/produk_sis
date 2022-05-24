@@ -123,6 +123,7 @@
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
                                     <th>Alamat</th>
+                                    <th>Akses</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -150,6 +151,11 @@
                                         <td>{{ $item->nama_pegawai}}</td>
                                         <td>{{ $item->jk}}</td>
                                         <td>{{ $item->alamat}}</td>
+                                        <td class="text-center">@if (isset($item->userakses))
+                                          <span class="badge bg-success">ada</span>
+                                        @else
+                                            <a href="{{ url('aksespegawai/create?id='.$item->id) }}" class="btn btn-danger btn-sm">Beri Akses</a>
+                                        @endif</td>
                                         <td class="text-center">{!! UIstatus($item->status) !!}</td>
                                     </tr>
                                 @empty

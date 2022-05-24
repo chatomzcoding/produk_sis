@@ -192,6 +192,9 @@
             </a>
           </li>
           @includeWhen(view()->exists($user->level.'.menu'), $user->level.'.menu')
+          @if ($user->level == 'guru' || $user->level == 'tu')
+            @include('sekolah.menu')
+          @endif
           <li class="nav-header">SISTEM</li>
           {{-- <li class="nav-item">
             <a href="#" class="nav-link active">

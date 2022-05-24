@@ -6,3 +6,11 @@ if (! function_exists('sis_namahari')) {
         return $result;
     }
 }
+if (! function_exists('sis_akseskhusus')) {
+    function sis_akseskhusus()
+    {
+        $result = ['tidak ada','kesiswaan','kepegawaian','kurikulum','aset','perpustakaan','administrasi'];
+        sort($result);
+        return $result;
+    }
+}

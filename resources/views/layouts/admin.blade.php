@@ -11,7 +11,7 @@
 
   @yield('meta')
 
-  <title>@yield('title')</title>
+  <title>{{ $title }}</title>
 
   <link rel="shortcut icon" href="{{ asset('/img/bunefit.png')}}">
 

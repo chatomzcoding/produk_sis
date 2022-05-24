@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AksespegawaiController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\InfowebsiteController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Kbm\KbmController;
 use App\Http\Controllers\Kbm\KelasController;
 use App\Http\Controllers\Kbm\MatapelajaranController;
 use App\Http\Controllers\Kbm\TahunajaranController;
+use App\Http\Controllers\Sekolah\AksessiswaController;
 use App\Http\Controllers\Sekolah\PegawaiController;
 use App\Http\Controllers\Sekolah\SiswaController;
 use App\Http\Controllers\Sistem\UserController;
@@ -42,6 +44,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('/demo',[DemoController::class,'index']);
 
 
+    Route::resource('siswa', SiswaController::class);
+    Route::resource('aksessiswa', AksessiswaController::class);
     // Route Admin
     Route::middleware(['admin'])->group(function () {
         // simpan route admin dibawah ini
@@ -57,8 +61,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
         Route::resource('sarana', SaranaController::class);
         
         // SEKOLAH
-        Route::resource('siswa', SiswaController::class);
         Route::resource('pegawai', PegawaiController::class);
+        Route::resource('aksespegawai', AksespegawaiController::class);
         
         // KBM
         Route::resource('kbm', KbmController::class);

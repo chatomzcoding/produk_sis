@@ -5,16 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pegawai extends Model
+class Aksespegawai extends Model
 {
     use HasFactory;
 
-    protected $table = 'pegawai';
+    protected $table = 'akses_pegawai';
 
     protected $guarded = [];
-
-    public function userakses()
-    {
-        return $this->hasOne(Aksespegawai::class);
-    }
 }

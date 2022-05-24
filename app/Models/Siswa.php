@@ -12,4 +12,9 @@ class Siswa extends Model
     protected $table = 'siswa';
 
     protected $guarded = [];
+
+    public function aksessiswa()
+    {
+        return $this->hasOne(Aksessiswa::class);
+    }
 }

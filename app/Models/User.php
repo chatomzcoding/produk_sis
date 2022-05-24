@@ -60,4 +60,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function aksespegawai()
+    {
+        return $this->hasOne(Aksespegawai::class);
+    }
 }

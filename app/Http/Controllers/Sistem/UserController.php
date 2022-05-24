@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Sistem;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aksespegawai;
+use App\Models\Aksessiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
@@ -22,7 +24,8 @@ class UserController extends Controller
 
     public function index()
     {
-        //
+        $user   = User::where('level','guru')->orWhere('level','tu')->get();
+        return view('admin.user.index', compact('user'));
     }
 
     /**
@@ -43,30 +46,81 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'photo' => 'required|file|image|mimes:jpeg,png,jpg|max:1000',
-            'password' => 'min:6',
-            'password_confirmation' => 'required_with:password|same:password|min:6',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        ]);
-        // menyimpan data file yang diupload ke variabel $file
-        $file = $request->file('photo');
+        $s = (isset($request->s)) ? $request->s : 'store' ;
+        switch ($s) {
+            case 'pegawai':
+                $request->validate([
+                    'password' => 'min:6',
+                    'password_confirmation' => 'required_with:password|same:password|min:6',
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
+
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'level' => $request->level,
+                    'photo' => NULL,
+                    'password' => Hash::make($request->password),
+                ]);
+                $user   = User::where('email',$request->email)->first();
+                Aksespegawai::create([
+                    'user_id' => $user->id,
+                    'pegawai_id' => $request->pegawai_id,
+                    'akses' => $request->akses
+                ]);
         
-        $nama_file = time()."_".$file->getClientOriginalName();
-        $tujuan_upload = 'img/user';
-        // isi dengan nama folder tempat kemana file diupload
-        $file->move($tujuan_upload,$nama_file);
+                return redirect('pegawai')->with('ds','User');
+                break;
+            case 'siswa':
+                $request->validate([
+                    'password' => 'min:6',
+                    'password_confirmation' => 'required_with:password|same:password|min:6',
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'level' => $request->level,
-            'photo' => $nama_file,
-            'password' => Hash::make($request->password),
-        ]);
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'level' => $request->level,
+                    'photo' => NULL,
+                    'password' => Hash::make($request->password),
+                ]);
+                $user   = User::where('email',$request->email)->first();
+                Aksessiswa::create([
+                    'user_id' => $user->id,
+                    'siswa_id' => $request->siswa_id,
+                ]);
+        
+                return redirect('siswa')->with('ds','User');
+                break;
+            
+            default:
+                $request->validate([
+                    'name' => ['required', 'string', 'max:255'],
+                    'photo' => 'required|file|image|mimes:jpeg,png,jpg|max:1000',
+                    'password' => 'min:6',
+                    'password_confirmation' => 'required_with:password|same:password|min:6',
+                    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                ]);
+                // menyimpan data file yang diupload ke variabel $file
+                $file = $request->file('photo');
+                
+                $nama_file = time()."_".$file->getClientOriginalName();
+                $tujuan_upload = 'img/user';
+                // isi dengan nama folder tempat kemana file diupload
+                $file->move($tujuan_upload,$nama_file);
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'level' => $request->level,
+                    'photo' => $nama_file,
+                    'password' => Hash::make($request->password),
+                ]);
+        
+                return redirect()->back()->with('ds','User');
+                break;
+        }
 
-        return redirect()->back()->with('ds','User');
     }
 
     /**
