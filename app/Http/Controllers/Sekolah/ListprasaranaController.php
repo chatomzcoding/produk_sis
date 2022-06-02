@@ -70,9 +70,17 @@ class ListprasaranaController extends Controller
      * @param  \App\Models\Listprasarana  $listprasarana
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Listprasarana $listprasarana)
+    public function update(Request $request)
     {
-        //
+        Listprasarana::where('id',$request->id)->update([
+
+            'nama_prasarana' => $request->nama_prasarana,
+            'tanggal' => $request->tanggal,
+            'keterangan_prasarana' => $request->keterangan_prasarana,
+        ]);
+
+        return back()->with('du','List Prasarana');
+
     }
 
     /**
@@ -83,6 +91,8 @@ class ListprasaranaController extends Controller
      */
     public function destroy(Listprasarana $listprasarana)
     {
-        //
+        $listprasarana->delete();
+
+        return back()->with('dd','List Prasarana');
     }
 }

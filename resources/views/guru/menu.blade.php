@@ -14,13 +14,15 @@
       </p>
     </a>
     <ul class="nav nav-treeview">
-      @foreach ($user->aksespegawai->pegawai->jadwalpelajaran as $item)
+      @forelse ($user->aksespegawai->pegawai->jadwalpelajaran as $item)
         <li class="nav-item">
           <a href="{{ url('/matapelajaran/'.$item->matapelajaran_id)}}" class="nav-link">
             &nbsp;&nbsp;<i class="fas fa-bullhorn nav-icon"></i>
             <p>{{ $item->matapelajaran->nama_pelajaran }}</p>
           </a>
         </li>
-      @endforeach
+      @empty
+        <li class="nav-item"><a href="#" class="nav-link">&nbsp;&nbsp;<i class="fas fa-close nav-icon"></i> <p>Tidak ada</p></a></li>          
+      @endforelse
     </ul>
 </li>

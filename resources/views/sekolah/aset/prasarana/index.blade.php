@@ -155,12 +155,14 @@
         <script>
             $('#ubah').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
-                var nama_kelas = button.data('nama_kelas')
+                var nama = button.data('nama')
+                var keterangan = button.data('keterangan')
                 var id = button.data('id')
         
                 var modal = $(this)
         
-                modal.find('.modal-body #nama_kelas').val(nama_kelas);
+                modal.find('.modal-body #nama').val(nama);
+                modal.find('.modal-body #keterangan').val(keterangan);
                 modal.find('.modal-body #id').val(id);
             })
         </script>

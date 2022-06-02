@@ -70,9 +70,19 @@ class InventarisController extends Controller
      * @param  \App\Models\Inventaris  $inventaris
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventaris $inventaris)
+    public function update(Request $request)
     {
-        //
+        Inventaris::where('id',$request->id)->update([
+            'nama' => $request->nama,
+            'kondisi' => $request->kondisi,
+            'fungsi' => $request->fungsi,
+            'tgl_pengadaan' => $request->tgl_pengadaan,
+            'tahun_pengadaan' => $request->tahun_pengadaan,
+            'jumlah' => $request->jumlah,
+            'status' => $request->status,
+        ]);
+
+        return back()->with('du','Inventaris');
     }
 
     /**
@@ -81,8 +91,11 @@ class InventarisController extends Controller
      * @param  \App\Models\Inventaris  $inventaris
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Inventaris $inventaris)
+    public function destroy($inventaris)
     {
-        //
+        $inventaris = Inventaris::find($inventaris);
+        $inventaris->delete();
+
+        return back()->with('dd','Inventaris');
     }
 }

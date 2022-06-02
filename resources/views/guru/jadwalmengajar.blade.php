@@ -21,16 +21,16 @@
                        JADWAL MENGAJAR
                   </div>
                   <div class="card-body">
-                      @foreach ($pegawai->jadwalpelajaran as $item)
+                      @forelse ($pegawai->jadwalpelajaran as $item)
                         <div class="row">
-                           <div class="col-md-4">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-header">
                                         <strong>{{ $item->matapelajaran->nama_pelajaran }}</strong>
                                     </div>
                                 </div>
-                           </div>
-                           <div class="col-md-8">
+                            </div>
+                            <div class="col-md-8">
                                 <div class="card">
                                     <div class="card-body p-2">
                                         <table class="table table-borderless">
@@ -49,9 +49,14 @@
                                         </table>
                                     </div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
-                      @endforeach
+                          
+                      @empty
+                          <section class="text-center">
+                              <span class="font-italic">belum ada jadwal</span>
+                          </section>
+                      @endforelse
                   </div>
                 </div>
               </div>
