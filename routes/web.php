@@ -18,7 +18,10 @@ use App\Http\Controllers\Kbm\KelasController;
 use App\Http\Controllers\Kbm\MatapelajaranController;
 use App\Http\Controllers\Kbm\TahunajaranController;
 use App\Http\Controllers\Sekolah\AksessiswaController;
+use App\Http\Controllers\Sekolah\InventarisController;
+use App\Http\Controllers\Sekolah\ListprasaranaController;
 use App\Http\Controllers\Sekolah\PegawaiController;
+use App\Http\Controllers\Sekolah\PrasaranaController;
 use App\Http\Controllers\Sekolah\SiswaController;
 use App\Http\Controllers\Sistem\UserController;
 use App\Http\Controllers\Sistem\VisitorController;
@@ -57,6 +60,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
 
     Route::resource('siswa', SiswaController::class);
     Route::resource('aksessiswa', AksessiswaController::class);
+
+    // SARANA PRASARANA
+    Route::resource('prasarana', PrasaranaController::class);
+    Route::resource('listprasarana', ListprasaranaController::class);
+    Route::resource('inventaris', InventarisController::class);
 
       // KBM
       Route::resource('kbm', KbmController::class);

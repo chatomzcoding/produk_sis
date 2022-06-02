@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Listprasarana;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableSarana extends Migration
+class CreateTableInventaris extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +14,16 @@ class CreateTableSarana extends Migration
      */
     public function up()
     {
-        Schema::create('sarana', function (Blueprint $table) {
+        Schema::create('inventaris', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Listprasarana::class);
             $table->string('nama');
             $table->text('kondisi');
             $table->text('fungsi');
             $table->date('tgl_pengadaan')->nullable();
             $table->year('tahun_pengadaan')->nullable();
             $table->string('status');
-            $table->text('poto');
+            $table->text('poto')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ class CreateTableSarana extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sarana');
+        Schema::dropIfExists('inventaris');
     }
 }

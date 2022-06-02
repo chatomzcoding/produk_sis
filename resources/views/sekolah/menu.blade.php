@@ -56,6 +56,14 @@
             </ul>
         </li>
         @break
+    @case('aset')
+    <li class="nav-item">
+        <a href="{{ url('prasarana')}}" class="nav-link">
+          <i class="nav-icon fas fa-file"></i>
+          <p class="text">Sarana Prasarana</p>
+        </a>
+      </li>
+    @break
     @default
         
 @endswitch
