@@ -56,14 +56,22 @@
             </ul>
         </li>
         @break
-    @case('aset')
-    <li class="nav-item">
-        <a href="{{ url('prasarana')}}" class="nav-link">
-          <i class="nav-icon fas fa-file"></i>
-          <p class="text">Sarana Prasarana</p>
-        </a>
-      </li>
-    @break
-    @default
+        @case('aset')
+        <li class="nav-item">
+            <a href="{{ url('prasarana')}}" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p class="text">Sarana Prasarana</p>
+            </a>
+          </li>
+        @break
+        @case('kepegawaian')
+        <li class="nav-item">
+            <a href="{{ url('kepegawaian')}}" class="nav-link">
+              <i class="nav-icon fas fa-file"></i>
+              <p class="text">Kepegawaian</p>
+            </a>
+          </li>
+        @break
+        @default
         
 @endswitch

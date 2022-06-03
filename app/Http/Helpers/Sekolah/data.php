@@ -14,3 +14,25 @@ if (! function_exists('sis_akseskhusus')) {
         return $result;
     }
 }
+if (! function_exists('sis_arsipdokumen')) {
+    function sis_arsipdokumen()
+    {
+        $dokumen    = [
+            'ktp' => 'kartu tanda penduduk',
+            'kk' => 'kartu keluarga',
+            'sk_awal' => 'surat keputusan awal',
+            'npwp' => 'nomor pokok wajib pajak',
+            'karis' => 'karis',
+            'skgb' => 'skgb',
+            'sd' => 'ijasah sd',
+            'smp' => 'ijasah smp',
+            'sma' => 'ijasah sma',
+            's1' => 'ijasah s1',
+            's2' => 'ijasah s2',
+            's3' => 'ijasah s3',
+            'sertifikat' => 'sertifikat',
+            'lainnya' => 'lainnya'
+        ];
+        return $dokumen;
+    }
+}

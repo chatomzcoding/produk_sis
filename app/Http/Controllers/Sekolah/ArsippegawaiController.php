@@ -36,7 +36,38 @@ class ArsippegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dokumen = self::uploaddokumen($request);
+
+        Arsippegawai::create($dokumen);
+
+        return back()->with('ds','Arsip');
+    }
+
+    public function uploaddokumen($request)
+    {
+        $dokumen    = ['ktp','kk','sk_awal','npwp','karis','skgb','sd','smp','sma','s1','s2','s3','sertifikat','lainnya'];
+        $result     = [];
+        $result['pegawai_id'] = $request->pegawai_id;
+        foreach ($dokumen as $dok) {
+            if (isset($request->$dok)) {
+                $request->validate([
+                    $dok => 'required|mimes:pdf|max:10000',
+                ]);
+                // menyimpan data file yang diupload ke variabel $file
+                $file = $request->file($dok);
+                
+                $namafile = time()."_".$file->getClientOriginalName();
+                $tujuan_upload = 'public/dokumen/arsippegawai';
+                // isi dengan nama folder tempat kemana file diupload
+                $file->move($tujuan_upload,$namafile);
+            } else {
+                $namafile   = NULL;
+            }
+
+            $result[$dok] = $namafile;
+        }
+
+        return $result;
     }
 
     /**
