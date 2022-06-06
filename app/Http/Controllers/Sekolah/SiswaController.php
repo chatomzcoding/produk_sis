@@ -95,7 +95,7 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //
+        return view('sekolah.siswa.show', compact('siswa'));
     }
 
     /**
