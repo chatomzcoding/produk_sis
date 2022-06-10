@@ -15,7 +15,6 @@ class InfowebsiteController extends Controller
      */
     public function index()
     {
-        $menu   = 'datapokok';
         $info   = Infowebsite::first();
         $sosial = [
             'email' => NULL,
@@ -24,7 +23,7 @@ class InfowebsiteController extends Controller
             'wa' => NULL,
             'website' => NULL,
         ];
-        return view('admin.infowebsite.index', compact('menu','info'));
+        return view('admin.infowebsite.index', compact('info'));
     }
 
     /**
