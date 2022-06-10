@@ -74,6 +74,8 @@ class InventarisController extends Controller
     {
         Inventaris::where('id',$request->id)->update([
             'nama' => $request->nama,
+            'nib' => $request->nib,
+            'sumber' => $request->sumber,
             'kondisi' => $request->kondisi,
             'fungsi' => $request->fungsi,
             'tgl_pengadaan' => $request->tgl_pengadaan,

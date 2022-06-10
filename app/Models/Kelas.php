@@ -17,4 +17,9 @@ class Kelas extends Model
     {
         return $this->hasMany(Jadwalkelas::class)->orderBy('jam','ASC');
     }
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class);
+    }
 }

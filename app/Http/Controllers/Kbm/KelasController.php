@@ -7,6 +7,7 @@ use App\Models\Jadwalkelas;
 use App\Models\Jadwalpelajaran;
 use App\Models\Kelas;
 use App\Models\Matapelajaran;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -19,7 +20,8 @@ class KelasController extends Controller
     public function index()
     {
         $kelas  = Kelas::orderBy('nama_kelas','ASC')->get();
-        return view('kbm.kelas.index', compact('kelas'));
+        $pegawai = Pegawai::where('jabatan','tenaga pengajar')->get();
+        return view('kbm.kelas.index', compact('kelas','pegawai'));
     }
 
     /**
@@ -94,7 +96,8 @@ class KelasController extends Controller
     public function update(Request $request)
     {
         Kelas::where('id',$request->id)->update([
-            'nama_kelas' => $request->nama_kelas
+            'nama_kelas' => $request->nama_kelas,
+            'pegawai_id' => $request->pegawai_id
         ]);
         
         return back()->with('du','Kelas');
@@ -106,8 +109,10 @@ class KelasController extends Controller
      * @param  \App\Models\Kelas  $kelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kelas $kelas)
+    public function destroy($kelas)
     {
-        //
-    }
+        Kelas::find($kelas)->delete();
+
+        return back()->with('dd','Kelas');
+;    }
 }

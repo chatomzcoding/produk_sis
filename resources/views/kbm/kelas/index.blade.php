@@ -29,6 +29,7 @@
                                     <th width="5%">No</th>
                                     <th width="10%">Aksi</th>
                                     <th>Nama Kelas</th>
+                                    <th>Wali Kelas</th>
                                 </tr>
                             </thead>
                             <tbody class="text-capitalize">
@@ -38,11 +39,12 @@
                                         <td class="text-center">
                                             <x-aksi :id="$item->id" link="kelas/{{ $item->id}}">
                                                 <a href="{{ url('kelas/'.$item->id) }}" class="dropdown-item"><i class="fas fa-file" style="width: 25px"></i> DETAIL</a>
-                                                <button type="button" data-toggle="modal" data-nama_kelas="{{ $item->nama_kelas }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
+                                                <button type="button" data-toggle="modal" data-nama_kelas="{{ $item->nama_kelas }}"  data-pegawai_id="{{ $item->pegawai_id }}" data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                 </button>
                                             </x-aksi>
                                         </td>
                                         <td>{{ $item->nama_kelas}}</td>
+                                        <td>{{ $item->pegawai->nama_pegawai}}</td>
                                     </tr>
                                 @empty
                                     <tr class="text-center">
@@ -76,6 +78,16 @@
                                 <input type="text" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}" class="form-control" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Wali Kelas {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2">
+                                    @foreach ($pegawai as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </section>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -107,6 +119,16 @@
                                 <input type="text" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}" class="form-control" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Wali Kelas {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2">
+                                    @foreach ($pegawai as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </section>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -117,37 +139,19 @@
             </div>
             </div>
         </div>
-        <div class="modal fade" id="info">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                <h4 class="modal-title">INFORMASI</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body p-3">
-                    <section class="p-3">
-                       ini contoh info
-                    </section>
-                </div>
-                <div class="modal-footer text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                </div>
-            </div>
-            </div>
-        </div>
     </x-slot>
     <x-slot name="kodejs">
         <script>
             $('#ubah').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)
                 var nama_kelas = button.data('nama_kelas')
+                var pegawai_id = button.data('pegawai_id')
                 var id = button.data('id')
         
                 var modal = $(this)
         
                 modal.find('.modal-body #nama_kelas').val(nama_kelas);
+                modal.find('.modal-body #pegawai_id').val(pegawai_id);
                 modal.find('.modal-body #id').val(id);
             })
         </script>

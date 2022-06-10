@@ -28,7 +28,9 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th width="10%">Aksi</th>
+                                    <th>NIB</th>
                                     <th>Nama</th>
+                                    <th>Sumber</th>
                                     <th>Kondisi</th>
                                     <th>Fungsi</th>
                                     <th>Jumlah</th>
@@ -42,11 +44,13 @@
                                         <td class="text-center">{{ $loop->iteration}}</td>
                                         <td class="text-center">
                                             <x-aksi :id="$item->id" link="inventaris/{{ $item->id}}">
-                                                <button type="button" data-toggle="modal" data-nama="{{ $item->nama }}"  data-kondisi="{{ $item->kondisi }}"  data-fungsi="{{ $item->fungsi }}"  data-tgl_pengadaan="{{ $item->tgl_pengadaan }}"  data-tahun_pengadaan="{{ $item->tahun_pengadaan }}"  data-jumlah="{{ $item->jumlah }}"  data-status="{{ $item->status }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
+                                                <button type="button" data-toggle="modal" data-nama="{{ $item->nama }}" data-nib="{{ $item->nib }}" data-sumber="{{ $item->sumber }}"  data-kondisi="{{ $item->kondisi }}"  data-fungsi="{{ $item->fungsi }}"  data-tgl_pengadaan="{{ $item->tgl_pengadaan }}"  data-tahun_pengadaan="{{ $item->tahun_pengadaan }}"  data-jumlah="{{ $item->jumlah }}"  data-status="{{ $item->status }}"  data-id="{{ $item->id }}" data-target="#ubah" title="" class="dropdown-item" data-original-title="Edit Data"><i class="fa fa-edit text-success" style="width: 25px"> </i> EDIT
                                                 </button>
                                             </x-aksi>
                                         </td>
+                                        <td>{{ $item->nib}}</td>
                                         <td>{{ $item->nama}}</td>
+                                        <td>{{ $item->sumber}}</td>
                                         <td>{{ $item->kondisi}}</td>
                                         <td>{{ $item->fungsi}}</td>
                                         <td class="text-center">{{ $item->jumlah}}</td>
@@ -55,7 +59,7 @@
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="5" class="font-italic">-- belum ada data --</td>
+                                        <td colspan="10" class="font-italic">-- belum ada data --</td>
                                     </tr>
                                 @endforelse
                         </table>
@@ -85,6 +89,23 @@
                             <label for="" class="col-md-4 p-2">Nama {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
                                 <input type="text" name="nama" id="nama" value="{{ old('nama') }}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">NIB</label>
+                            <div class="col-md-8 p-0">
+                                <input type="text" name="nib" id="nib" value="{{ old('nib') }}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Sumber {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="sumber" id="sumber" class="form-control">
+                                    <option value="APBN">APBN</option>
+                                    <option value="APBD">APBD</option>
+                                    <option value="KOMITE">KOMITE</option>
+                                    <option value="SWADAYA MASYARAKAT">SWADAYA MASYARAKAT</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -143,6 +164,23 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">NIB</label>
+                            <div class="col-md-8 p-0">
+                                <input type="text" name="nib" id="nib" value="{{ old('nib') }}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Sumber {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="sumber" id="sumber" class="form-control">
+                                    <option value="APBN">APBN</option>
+                                    <option value="APBD">APBD</option>
+                                    <option value="KOMITE">KOMITE</option>
+                                    <option value="SWADAYA MASYARAKAT">SWADAYA MASYARAKAT</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Kondisi {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
                                 <input type="text" name="kondisi" id="kondisi" value="{{ old('kondisi') }}" class="form-control" required>
@@ -193,6 +231,8 @@
                 var button = $(event.relatedTarget)
                 var nama = button.data('nama')
                 var kondisi = button.data('kondisi')
+                var nib = button.data('nib')
+                var sumber = button.data('sumber')
                 var fungsi = button.data('fungsi')
                 var jumlah = button.data('jumlah')
                 var tgl_pengadaan = button.data('tgl_pengadaan')
@@ -204,6 +244,8 @@
         
                 modal.find('.modal-body #nama').val(nama);
                 modal.find('.modal-body #kondisi').val(kondisi);
+                modal.find('.modal-body #nib').val(nib);
+                modal.find('.modal-body #sumber').val(sumber);
                 modal.find('.modal-body #fungsi').val(fungsi);
                 modal.find('.modal-body #jumlah').val(jumlah);
                 modal.find('.modal-body #tgl_pengadaan').val(tgl_pengadaan);
