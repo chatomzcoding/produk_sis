@@ -21,7 +21,6 @@
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Kelas Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
                       <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="text-center">
@@ -48,7 +47,7 @@
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="3" class="font-italic">-- belum ada data --</td>
+                                        <td colspan="4" class="font-italic">-- belum ada data --</td>
                                     </tr>
                                 @endforelse
                         </table>
@@ -81,7 +80,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Wali Kelas {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2">
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4">
                                     @foreach ($pegawai as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
                                     @endforeach

@@ -89,6 +89,8 @@ class MatapelajaranController extends Controller
      */
     public function destroy(Matapelajaran $matapelajaran)
     {
-        //
+        $matapelajaran->delete();
+
+        return back()->with('dd','Mata Pelajaran');
     }
 }

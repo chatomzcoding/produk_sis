@@ -19,18 +19,6 @@
                 <div class="card">
                   <div class="card-header">
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Kelas Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
-                        {{-- <div class="float-right">
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="dropdown-item pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print" style="width: 25px"></i> CETAK</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button data-toggle="modal" data-target="#info" title="Informasi" class="dropdown-item" type="button"><i class="fas fa-info text-center" style="width: 25px"></i> INFO</button>
-                                </div>
-                            </div>
-                        </div> --}}
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
@@ -54,8 +42,15 @@
                                                 </button>
                                             </x-aksi>
                                         </td>
-                                        <td>{{ $item->matapelajaran->nama_pelajaran}}</td>
-                                        <td>{{ $item->pegawai->nama_pegawai}}</td>
+                                        <td>
+                                            @isset($item->matapelajaran)
+                                                {{ $item->matapelajaran->nama_pelajaran}}</td>
+                                            @endisset
+                                        <td>
+                                            @isset($item->pegawai)
+                                                {{ $item->pegawai->nama_pegawai}}
+                                            @endisset
+                                        </td>
                                         <td>{{ $item->lama_jam}} Jam</td>
                                     </tr>
                                 @empty
@@ -77,7 +72,7 @@
                 <form action="{{ url('jadwalpelajaran')}}" method="post" enctype="multipart/form-data">
                     @csrf
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Kelas</h4>
+                    <h4 class="modal-title">Tambah Data Jadwal Pelajaran</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -87,7 +82,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2" required>
+                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih mata pelajaran --</option>
                                     @foreach ($matapelajaran as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
@@ -98,7 +93,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2" required>
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih tenaga pengajar --</option>
                                     @foreach ($pegawai as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
@@ -140,7 +135,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2" required>
+                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih mata pelajaran --</option>
                                     @foreach ($matapelajaran as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
@@ -151,7 +146,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2" required>
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih tenaga pengajar --</option>
                                     @foreach ($pegawai as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
@@ -172,26 +167,6 @@
                 <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> SIMPAN PERUBAHAN</button>
                 </div>
                 </form>
-            </div>
-            </div>
-        </div>
-        <div class="modal fade" id="info">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <div class="modal-header">
-                <h4 class="modal-title">INFORMASI</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body p-3">
-                    <section class="p-3">
-                       ini contoh info
-                    </section>
-                </div>
-                <div class="modal-footer text-right">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                </div>
             </div>
             </div>
         </div>

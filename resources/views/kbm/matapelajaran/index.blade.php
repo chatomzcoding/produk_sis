@@ -19,21 +19,8 @@
                 <div class="card">
                   <div class="card-header">
                         <a href="#" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data List Mata Pelajaran Baru" data-toggle="modal" data-target="#tambah"><i class="fas fa-plus"></i> Tambah</a>
-                        {{-- <div class="float-right">
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="dropdown-item pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print" style="width: 25px"></i> CETAK</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button data-toggle="modal" data-target="#info" title="Informasi" class="dropdown-item" type="button"><i class="fas fa-info text-center" style="width: 25px"></i> INFO</button>
-                                </div>
-                            </div>
-                        </div> --}}
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
                       <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="text-center">

@@ -20,7 +20,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelas  = Kelas::orderBy('nama_kelas','ASC')->get();
-        $pegawai = Pegawai::where('jabatan','tenaga pengajar')->get();
+        $pegawai = Pegawai::where('jabatan','tenaga pengajar')->orderBy('nama_pegawai','ASC')->get();
         return view('kbm.kelas.index', compact('kelas','pegawai'));
     }
 

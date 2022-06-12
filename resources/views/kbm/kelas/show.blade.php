@@ -98,7 +98,7 @@
                     @csrf
                     <input type="hidden" name="kelas_id" value="{{ $kelas->id }}">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Jadwal Kelas</h4>
+                    <h4 class="modal-title">Tambah Data Jadwal Kelas {{ $kelas->nama_kelas }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -133,7 +133,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="time" name="jam_awal" id="jam_awal" value="{{ old('jam_awal') }}" class="form-control" required>
+                                            <input type="time" name="jam_awal" id="jam_awal" min="07:00" max="12:00" value="{{ old('jam_awal') }}" class="form-control" required>
                                         </td>
                                         <td>s/d</td>
                                         <td>

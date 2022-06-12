@@ -28,8 +28,6 @@
   <link rel="stylesheet" href="{{ asset('template/admin/lte/dist/css/adminlte.min.css')}}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('template/admin/lte/plugins/summernote/summernote-bs4.min.css')}}">
 
   <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
@@ -43,7 +41,6 @@
     <script src="{{ asset('vendor/sweetalert/sweetalert.min.js')}}"></script>
     <script src="{{ asset('vendor/sweetalert/sweetalert2.css')}}"></script>
 
-    <script type="text/javascript" src="{{ asset('/vendor/ckeditor/ckeditor.js')}}"></script>
   {{ $head ?? ''}}
   @livewireStyles
 
@@ -293,20 +290,12 @@
 <script src="{{ asset('template/admin/lte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Select2 -->
 <script src="{{ asset('template/admin/lte/plugins/select2/js/select2.full.min.js')}}"></script>
-<!-- ChartJS -->
-<script src="{{ asset('template/admin/lte/plugins/chart.js/Chart.min.js')}}"></script>
-<!-- Sparkline -->
-<script src="{{ asset('template/admin/lte/plugins/sparklines/sparkline.js')}}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('template/admin/lte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-<!-- Summernote -->
-<script src="{{ asset('template/admin/lte/plugins/summernote/summernote-bs4.min.js')}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('template/admin/lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('template/admin/lte/dist/js/adminlte.js')}}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('template/admin/lte/dist/js/pages/dashboard.js')}}"></script>
 
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('template/admin/lte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -320,7 +309,7 @@
 <script src="{{ asset('template/admin/lte/plugins/pdfmake/vfs_fonts.js')}}"></script>
 <script src="{{ asset('template/admin/lte/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('template/admin/lte/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{ asset('vendor/select2/dist/js/select2.min.js')}}"></script>
+{{-- <script src="{{ asset('vendor/select2/dist/js/select2.min.js')}}"></script> --}}
 
 <!-- AdminLTE for demo purposes -->
 {{-- <script src="{{ asset('template/admin/lte/dist/js/demo.js')}}"></script> --}}
@@ -333,6 +322,11 @@
  $(function () {
     //Initialize Select2 Elements
     $('.select2').select2()
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
  })
 </script>
 

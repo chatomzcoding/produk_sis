@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Kbm;
 
 use App\Http\Controllers\Controller;
 use App\Models\Jadwalkelas;
+use App\Models\Jadwalpelajaran;
+use App\Models\Kelas;
+use App\Models\Matapelajaran;
 use Illuminate\Http\Request;
 
 class JadwalkelasController extends Controller
@@ -36,6 +39,14 @@ class JadwalkelasController extends Controller
      */
     public function store(Request $request)
     {
+        // cek jika jadwal sudah ada
+        $cek    = Jadwalkelas::where('jadwalpelajaran_id',$request->jadwalpelajaran_id)->where('hari',$request->hari)->where('kelas_id',$request->kelas_id)->first();
+        if ($cek) {
+            $kelas  = Kelas::find($request->kelas_id);
+            $jadwalpelajaran = Jadwalpelajaran::find($request->jadwalpelajaran_id);
+            return back()->with('warningv2','Maaf Jadwal Pelajaran Kelas '.$kelas->nama_kelas.' mata pelajaran '.$jadwalpelajaran->matapelajaran->nama_pelajaran.' Hari '.$request->hari.' sudah ada');
+        }
+        die();
         Jadwalkelas::create([
             'kelas_id' => $request->kelas_id,
             'jadwalpelajaran_id' => $request->jadwalpelajaran_id,
