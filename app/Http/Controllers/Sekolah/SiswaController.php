@@ -129,6 +129,9 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        //
+        $tujuan_upload = 'public/img/siswa';
+        deletefile($tujuan_upload.'/'.$siswa->poto);
+
+        return back()->with('dd','Siswa');
     }
 }

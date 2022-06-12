@@ -21,17 +21,16 @@
                         <a href="{{ url('siswa') }}" class="btn btn-outline-secondary btn-sm pop-info" title="Kembali ke daftar siswa"><i class="fas fa-angle-left"></i> Kembali</a>
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
                       <form action="{{ url('siswa') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <section class="p-3">
                             <div class="form-group row">
                                 <label for="" class="col-md-4 p-2">Nomor Identitas Siswa</label>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nisn" id="nisn" maxlength="20" value="{{ old('nisn') }}" placeholder="NISN" class="form-control" required>
+                                    <input type="text" name="nisn" id="nisn" maxlength="10" value="{{ old('nisn') }}" placeholder="NISN" class="form-control" required>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nipd" id="nipd" maxlength="20" value="{{ old('nipd') }}"  placeholder="NIPD" class="form-control" required>
+                                    <input type="text" name="nipd" id="nipd" maxlength="10" value="{{ old('nipd') }}"  placeholder="NIPD" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
