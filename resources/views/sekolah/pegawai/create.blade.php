@@ -27,10 +27,10 @@
                             <div class="form-group row">
                                 <label for="" class="col-md-4 p-2">Nomor Identitas Pegawai</label>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nip" id="nip" maxlength="20" value="{{ old('nip') }}" placeholder="NIP" class="form-control" required>
+                                    <input type="text" name="nip" id="nip" maxlength="18" value="{{ old('nip') }}" placeholder="NIP" class="form-control" required>
                                 </div>
                                 <div class="col-md-4 p-0">
-                                    <input type="text" name="nuptk" id="nuptk" maxlength="20" value="{{ old('nuptk') }}"  placeholder="NUPTK" class="form-control" required>
+                                    <input type="text" name="nuptk" id="nuptk" maxlength="16" value="{{ old('nuptk') }}"  placeholder="NUPTK" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -55,10 +55,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 p-2">Jabatan</label>
+                                <label for="" class="col-md-4 p-2">Tugas/Jabatan {!! ireq() !!}</label>
                                 <div class="col-md-8 p-0">
-                                    <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan') }}" class="form-control">
+                                    <select name="jabatan" id="jabatan" class="form-control" required>
+                                        <option value="">-- pilih Jabatan --</option>
+                                        <option value="tenaga pengajar">Tenaga Pengajar</option>
+                                    </select>
                                 </div>
+                                {{-- <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan') }}" class="form-control"> --}}
                             </div>
                             <div class="form-group row">
                                 <label for="" class="col-md-4 p-2">No Telp</label>

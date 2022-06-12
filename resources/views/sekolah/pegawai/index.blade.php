@@ -14,8 +14,7 @@
     </x-slot>
     <x-slot name="content">
         <div class="container-fluid">
-            <div class="row">
-                {{-- start col --}}
+            {{-- <div class="row">
                 <div class="col-12 col-sm-6 col-md-3">
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-user-tie"></i></span>
@@ -27,8 +26,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- end col --}}
-                {{-- start col --}}
                 <div class="col-12 col-sm-6 col-md-3">
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-male"></i></span>
@@ -40,8 +37,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- end col --}}
-                {{-- start col --}}
                 <div class="col-12 col-sm-6 col-md-3">
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-female"></i></span>
@@ -53,8 +48,6 @@
                     </div>
                   </div>
                 </div>
-                {{-- end col --}}
-                {{-- start col --}}
                 <div class="col-12 col-sm-6 col-md-3">
                   <div class="info-box mb-3">
                     <span class="info-box-icon bg-secondary elevation-1"><i class="fas fa-user-check"></i></span>
@@ -66,53 +59,14 @@
                     </div>
                   </div>
                 </div>
-                {{-- end col --}}
-            </div>
+            </div> --}}
             <div class="row">
-              <!-- left column -->
               <div class="col-md-12">
-                <!-- general form elements -->
                 <div class="card">
                   <div class="card-header">
-                    {{-- <h3 class="card-title">Daftar Unit</h3> --}}
                         <a href="{{ url('pegawai/create') }}" class="btn btn-outline-primary btn-sm pop-info" title="Tambah Data Siswa Baru"><i class="fas fa-plus"></i> Tambah</a>
-                        <div class="float-right">
-                            <!-- Default dropleft button -->
-                            <div class="btn-group dropleft">
-                                <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Aksi
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a href="{{ url('cetakdata?s=satuanbarang') }}" target="_blank" class="dropdown-item pop-info" title="Cetak Data Satuan Barang"><i class="fas fa-print" style="width: 25px"></i> CETAK</a>
-                                    <div class="dropdown-divider"></div>
-                                    <button data-toggle="modal" data-target="#info" title="Informasi" class="dropdown-item" type="button"><i class="fas fa-info text-center" style="width: 25px"></i> INFO</button>
-                                </div>
-                            </div>
-                        </div>
                   </div>
                   <div class="card-body">
-                      @include('sistem.notifikasi')
-                      <section class="mb-3">
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                <i class="fas fa-filter"></i> Filter
-                            </a>
-                          <div class="collapse" id="collapseExample">
-                              <div class="card card-body mt-2">
-                                {{-- <form action="{{ url($main['link']) }}" method="get">
-                                  <div class="row">
-                                     <div class="form-group col-md-2">
-                                         <label for="" class="mb-0">Jenis Kelamin</label>
-                                          <select name="jk" id="" class="form-control" onchange="this.form.submit();">
-                                              <option value="semua">-- SEMUA --</option>
-                                              <option value="laki-laki">Laki - Laki</option>
-                                              <option value="perempuan">Perempuan</option>
-                                          </select>
-                                      </div>
-                                  </div>
-                              </form> --}}
-                            </div>
-                          </div>
-                      </section>
                       <div class="table-responsive">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead class="text-center">
@@ -160,7 +114,7 @@
                                     </tr>
                                 @empty
                                     <tr class="text-center">
-                                        <td colspan="7" class="font-italic">-- belum ada data --</td>
+                                        <td colspan="8" class="font-italic">-- belum ada data --</td>
                                     </tr>
                                 @endforelse
                         </table>

@@ -122,6 +122,10 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
-        //
+        $tujuan_upload = 'public/img/guru';
+        deletefile($tujuan_upload.'/'.$pegawai->poto);
+        $pegawai->delete();
+
+        return back()->with('dd','Pegawai');
     }
 }
