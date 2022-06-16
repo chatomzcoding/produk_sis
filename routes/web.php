@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AbsensiController;
 use App\Http\Controllers\Admin\AksespegawaiController;
 use App\Http\Controllers\Admin\ArtikelController;
 use App\Http\Controllers\Admin\GaleriController;
@@ -7,7 +8,9 @@ use App\Http\Controllers\Admin\InfowebsiteController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\SaranaController;
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\Guru\AbsensikelasController;
 use App\Http\Controllers\Guru\HomeController as GuruHomeController;
+use App\Http\Controllers\Guru\SiswanilaiController;
 use App\Http\Controllers\Guru\SoalController;
 use App\Http\Controllers\Guru\UjianController;
 use App\Http\Controllers\Homepage\LandingController;
@@ -55,9 +58,14 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // akses siswa
     Route::get('homesiswa/biodata/{id}',[HomeController::class,'biodata']);
     Route::get('homesiswa/jadwal/{id}',[HomeController::class,'jadwal']);
+    Route::get('homesiswa/ujian/{id}',[HomeController::class,'ujian']);
+    Route::get('homesiswa/soal/{id}/{ujian}',[HomeController::class,'soal']);
     // akses guru
     Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
+    Route::get('homeguru/agendakelas/{id}',[GuruHomeController::class,'agendakelas']);
     Route::resource('ujian', UjianController::class);
+    Route::resource('absensikelas', AbsensikelasController::class);
+    Route::resource('siswanilai', SiswanilaiController::class);
     Route::resource('soal', SoalController::class);
 
     Route::resource('siswa', SiswaController::class);
@@ -82,6 +90,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     // Route Admin
     Route::middleware(['admin'])->group(function () {
         // simpan route admin dibawah ini
+
+        // ABSENSI
+        Route::get('admin/absensi',[AbsensiController::class,'index']);
+        Route::get('admin/absensi/{sesi}',[AbsensiController::class,'show']);
 
         // SISTEM
         Route::resource('info-website', InfowebsiteController::class);

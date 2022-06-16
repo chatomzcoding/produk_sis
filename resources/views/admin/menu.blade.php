@@ -5,6 +5,12 @@
   </a>
 </li>
 <li class="nav-item">
+  <a href="{{ url('/admin/absensi')}}" class="nav-link">
+    <i class="nav-icon fas fa-user-tie"></i>
+    <p class="text">Data Absensi</p>
+  </a>
+</li>
+<li class="nav-item">
     <a href="#" class="nav-link">
       <i class="nav-icon fas fa-user-tie"></i>
       <p>

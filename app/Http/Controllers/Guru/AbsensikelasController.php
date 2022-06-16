@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
-use App\Models\Soal;
-use App\Models\Ujian;
+use App\Models\Absensikelas;
+use App\Models\Jadwalkelas;
 use Illuminate\Http\Request;
 
-class SoalController extends Controller
+class AbsensikelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,9 +26,7 @@ class SoalController extends Controller
      */
     public function create()
     {
-        $ujian  = Ujian::find($_GET['id']);
-
-        return view('guru.soal.create', compact('ujian'));
+        //
     }
 
     /**
@@ -39,35 +37,32 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->tipe == 'pilihan ganda') {
-            $soal   = [
-                'isi' => $request->soal,
-                'pilihan' => $request->pilihan
-            ];
+        // cek jika semua hadir
+        if ($request->status_absensi == 'semua') {
+            $jadwalkelas = Jadwalkelas::find($request->jadwalkelas_id);
+            foreach ($jadwalkelas->kelas->kbm as $key) {
+                Absensikelas::create([
+                    'jadwalkelas_id' => $request->jadwalkelas_id,
+                    'siswa_id' => $key->siswa_id,
+                    'tanggal' => $request->tanggal,
+                    'status_absensi' => 'hadir',
+                ]);
+            }
+
+            return back()->with('successv2','Siswa semua hadir');
         } else {
-            $soal   = [
-                'isi' => $request->soal,
-            ];
+            # code...
         }
         
-
-        Soal::create([
-            'ujian_id' => $request->ujian_id,
-            'soal' => json_encode($soal),
-            'jawaban' => $request->jawaban,
-            'tipe' => $request->tipe
-        ]);
-
-        return back()->with('ds','Soal');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Soal  $soal
+     * @param  \App\Models\Absensikelas  $absensikelas
      * @return \Illuminate\Http\Response
      */
-    public function show(Soal $soal)
+    public function show(Absensikelas $absensikelas)
     {
         //
     }
@@ -75,10 +70,10 @@ class SoalController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Soal  $soal
+     * @param  \App\Models\Absensikelas  $absensikelas
      * @return \Illuminate\Http\Response
      */
-    public function edit(Soal $soal)
+    public function edit(Absensikelas $absensikelas)
     {
         //
     }
@@ -87,10 +82,10 @@ class SoalController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Soal  $soal
+     * @param  \App\Models\Absensikelas  $absensikelas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Soal $soal)
+    public function update(Request $request, Absensikelas $absensikelas)
     {
         //
     }
@@ -98,10 +93,10 @@ class SoalController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Soal  $soal
+     * @param  \App\Models\Absensikelas  $absensikelas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Soal $soal)
+    public function destroy(Absensikelas $absensikelas)
     {
         //
     }

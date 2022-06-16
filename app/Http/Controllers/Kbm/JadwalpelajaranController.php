@@ -54,7 +54,9 @@ class JadwalpelajaranController extends Controller
      */
     public function show(Jadwalpelajaran $jadwalpelajaran)
     {
-        //
+        $matapelajaran  = $jadwalpelajaran->matapelajaran;
+        $jadwalkelas    = $jadwalpelajaran->jadwalkelas;
+        return view('guru.jadwalpelajaran', compact('jadwalpelajaran','matapelajaran','jadwalkelas'));
     }
 
     /**

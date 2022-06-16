@@ -22,6 +22,7 @@ class CustomservicesProvider extends ServiceProvider
         require_once app_path() . '/Http/Helpers/Custom/db.php';
         require_once app_path() . '/Http/Helpers/Sekolah/db.php';
         require_once app_path() . '/Http/Helpers/Sekolah/data.php';
+        require_once app_path() . '/Http/Helpers/Sekolah/zklibrary.php';
     }
 
     /**

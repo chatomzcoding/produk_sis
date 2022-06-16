@@ -17,4 +17,17 @@ class Ujian extends Model
     {
         return $this->hasMany(Soal::class);
     }
+    public function soalpg()
+    {
+        return $this->hasMany(Soal::class)->where('tipe','pilihan ganda');
+    }
+    public function soaluraian()
+    {
+        return $this->hasMany(Soal::class)->where('tipe','uraian');
+    }
+
+    public function siswanilai()
+    {
+        return $this->hasMany(Siswanilai::class);
+    }
 }

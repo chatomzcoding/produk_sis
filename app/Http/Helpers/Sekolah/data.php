@@ -6,6 +6,13 @@ if (! function_exists('sis_namahari')) {
         return $result;
     }
 }
+if (! function_exists('sis_cekarsip')) {
+    function sis_cekarsip($arsip)
+    {
+        $arsip = (!is_null($arsip)) ? "<span class='text-success'>sudah ada</span>" : NULL ;
+        return $arsip;
+    }
+}
 if (! function_exists('sis_akseskhusus')) {
     function sis_akseskhusus()
     {

@@ -22,4 +22,9 @@ class Kelas extends Model
     {
         return $this->belongsTo(Pegawai::class);
     }
+
+    public function kbm()
+    {
+        return $this->hasMany(Kbm::class)->where('status_kbm','aktif');
+    }
 }

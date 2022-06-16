@@ -43,7 +43,7 @@ class ArsippegawaiController extends Controller
         return back()->with('ds','Arsip');
     }
 
-    public function uploaddokumen($request)
+    public function uploaddokumen($request,$arsip=NULL)
     {
         $dokumen    = ['ktp','kk','sk_awal','npwp','karis','skgb','sd','smp','sma','s1','s2','s3','sertifikat','lainnya'];
         $result     = [];
@@ -61,7 +61,12 @@ class ArsippegawaiController extends Controller
                 // isi dengan nama folder tempat kemana file diupload
                 $file->move($tujuan_upload,$namafile);
             } else {
-                $namafile   = NULL;
+                if (!is_null($arsip)) {
+                    $namafile   = $arsip->$dok;
+                } else {
+                    $namafile   = NULL;
+                }
+                
             }
 
             $result[$dok] = $namafile;
@@ -101,7 +106,10 @@ class ArsippegawaiController extends Controller
      */
     public function update(Request $request, Arsippegawai $arsippegawai)
     {
-        //
+        $dokumen = self::uploaddokumen($request,$arsippegawai);
+        Arsippegawai::where('id',$arsippegawai->id)->update($dokumen);
+
+        return back()->with('du','Arsip Pegawai');
     }
 
     /**
