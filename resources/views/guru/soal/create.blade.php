@@ -35,43 +35,62 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-md-4">Pilihan Jawaban</label>
-                                    <div class="col-md-8 p-0">
-                                        <table class="w-100">
-                                            <tr>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <input type="text" name="pilihan[]" placeholder="pilihan A" class="form-control">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <input type="text" name="pilihan[]" placeholder="pilihan C" class="form-control">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <input type="text" name="pilihan[]" placeholder="pilihan B" class="form-control">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-                                                        <input type="text" name="pilihan[]" placeholder="pilihan D" class="form-control">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <div class="col-md-4 p-0">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">A</span>
+                                            </div>
+                                            <input type="text" name="pilihan[]" class="form-control" placeholder="pilihan A" aria-label="A" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">B</span>
+                                            </div>
+                                            <input type="text" name="pilihan[]" class="form-control" placeholder="pilihan B" aria-label="B" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">C</span>
+                                            </div>
+                                            <input type="text" name="pilihan[]" class="form-control" placeholder="pilihan C" aria-label="C" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">D</span>
+                                            </div>
+                                            <input type="text" name="pilihan[]" class="form-control" placeholder="pilihan D" aria-label="D" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text" id="basic-addon1">E</span>
+                                            </div>
+                                            <input type="text" name="pilihan[]" class="form-control" placeholder="pilihan E" aria-label="E" aria-describedby="basic-addon1">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="" class="col-md-4">Jawaban</label>
-                                    <select name="jawaban" id="" class="form-control col-md-8">
-                                        <option value="0">A</option>
-                                        <option value="1">B</option>
-                                        <option value="2">C</option>
-                                        <option value="3">D</option>
-                                    </select>
+                                    <div class="col-md-8">
+                                        <table class="table table-borderless">
+                                            <tr>
+                                                <th>
+                                                    <input type="radio" name="jawaban" value="0"> A
+                                                </th>
+                                                <th>
+                                                    <input type="radio" name="jawaban" value="1"> B
+                                                </th>
+                                                <th>
+                                                    <input type="radio" name="jawaban" value="2"> C
+                                                </th>
+                                                <th>
+                                                    <input type="radio" name="jawaban" value="3"> D
+                                                </th>
+                                                <th>
+                                                    <input type="radio" name="jawaban" value="4"> E
+                                                </th>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="form-group text-right">
                                     <button type="submit" class="btn btn-primary btn-sm">SIMPAN SOAL</button>
@@ -92,7 +111,7 @@
                                        @foreach ($ujian->soal as $item)
                                            @php
                                                $soal = json_decode($item->soal);
-                                               $abjad = ['A','B','C','D'];
+                                               $abjad = ['A','B','C','D','E'];
                                            @endphp
                                            <tr>
                                                <td>{{ $loop->iteration }}</td>

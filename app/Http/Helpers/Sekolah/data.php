@@ -2,8 +2,18 @@
 if (! function_exists('sis_namahari')) {
     function sis_namahari()
     {
-        $result = ['senin','selasa','rabu','kamis','jumat','sabtu'];
+        $result = ['senin','selasa','rabu','kamis','jumat'];
         return $result;
+    }
+}
+if (! function_exists('sis_jamakhir')) {
+    function sis_jamakhir($jam,$lama=1)
+    {
+        $menit  = 45 * $lama;
+        $date1 = "2022-01-01 ".$jam.":00";
+        $date = new DateTime($date1);
+        $date_plus = $date->modify("+".$menit." minutes");
+        return $date_plus->format("H:i");
     }
 }
 if (! function_exists('sis_cekarsip')) {

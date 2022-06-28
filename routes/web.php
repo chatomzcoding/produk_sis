@@ -31,6 +31,7 @@ use App\Http\Controllers\Sekolah\SiswaController;
 use App\Http\Controllers\Sistem\UserController;
 use App\Http\Controllers\Sistem\VisitorController;
 use App\Http\Controllers\Siswa\HomeController;
+use App\Http\Controllers\Siswa\SiswanilaiController as SiswaSiswanilaiController;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -60,12 +61,13 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('homesiswa/jadwal/{id}',[HomeController::class,'jadwal']);
     Route::get('homesiswa/ujian/{id}',[HomeController::class,'ujian']);
     Route::get('homesiswa/soal/{id}/{ujian}',[HomeController::class,'soal']);
+    Route::resource('siswanilai', SiswaSiswanilaiController::class);
     // akses guru
     Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
     Route::get('homeguru/agendakelas/{id}',[GuruHomeController::class,'agendakelas']);
+    Route::get('homeguru/pelajaran/{id}',[GuruHomeController::class,'pelajaran']);
     Route::resource('ujian', UjianController::class);
     Route::resource('absensikelas', AbsensikelasController::class);
-    Route::resource('siswanilai', SiswanilaiController::class);
     Route::resource('soal', SoalController::class);
 
     Route::resource('siswa', SiswaController::class);

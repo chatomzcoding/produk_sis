@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guru;
 use App\Http\Controllers\Controller;
 use App\Models\Absensikelas;
 use App\Models\Jadwalkelas;
+use App\Models\Jadwalpelajaran;
 use App\Models\Pegawai;
 use App\Models\Siswanilai;
 use Illuminate\Http\Request;
@@ -79,5 +80,17 @@ class HomeController extends Controller
         }
 
         return view('guru.agendakelas', compact('jadwalkelas','kbm','absensi','tanggal','ujian'));
+    }
+
+    public function pelajaran($id)
+    {
+        $jadwalpelajaran    = Jadwalpelajaran::find($id);
+        $jadwalkelas        = $jadwalpelajaran->jadwalkelas;
+        $matapelajaran      = $jadwalpelajaran->matapelajaran;
+        $kelas              = [];
+        foreach ($jadwalkelas as $key) {
+            $kelas[$key->kelas->nama_kelas] = $key;
+        }
+        return view('guru.jadwalpelajaran', compact('jadwalpelajaran','matapelajaran','jadwalkelas','kelas'));
     }
 }

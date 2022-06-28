@@ -32,19 +32,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($jadwalujian as $item)
+                            @foreach ($jadwalujian as $mapel => $ujian)
                                 <tr class="table-info">
-                                    <td colspan="4" class="text-uppercase font-weight-bold">{{ $item['mata_pelajaran'] }}</td>
+                                    <td colspan="4" class="text-uppercase font-weight-bold">{{ $mapel }}</td>
                                 </tr>
-                                @foreach ($item['jadwal'] as $i)
+                                @foreach ($ujian as $i)
                                 <tr>
                                     <td></td>
                                     <td>
                                     {{ ucwords($i->nama_ujian) }} <br> {{ date_indo($i->tgl_ujian) }}
                                     </td>
                                     <td>
-                                        @if ($i->tgl_ujian <= tgl_sekarang())
-                                        <a href="{{ url('homesiswa/soal/'.$siswa->id.'/'.$i->id) }}">Lihat Soal</a>
+                                        @if ($i->tgl_ujian == tgl_sekarang())
+                                        <div class="alert alert-info text-center">
+                                            Kerjakan Soal Hari ini <br>
+                                            <a href="{{ url('homesiswa/soal/'.$siswa->id.'/'.$i->id) }}">Buka Soal</a>
+                                        </div>
                                         @else
                                             belum bisa dilihat
                                         @endif

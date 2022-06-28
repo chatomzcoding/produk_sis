@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Kbm;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jadwalkelas;
 use App\Models\Jadwalpelajaran;
+use App\Models\Kelas;
 use App\Models\Matapelajaran;
 use App\Models\Pegawai;
+use App\Models\Tahunajaran;
+use DateTime;
 use Illuminate\Http\Request;
 
 class JadwalpelajaranController extends Controller
@@ -18,9 +22,18 @@ class JadwalpelajaranController extends Controller
     public function index()
     {
         $jadwalpelajaran    = Jadwalpelajaran::all();
-        $pegawai            = Pegawai::all();
+        $datapegawai            = Pegawai::where('jabatan','tenaga pengajar')->get();
+        // cek 
+        $pegawai            = [];
+        foreach ($datapegawai as $key) {
+            $cekjadwalpelajaran = Jadwalpelajaran::where('pegawai_id',$key->id)->first();
+            if (!$cekjadwalpelajaran) {
+                $pegawai[] = $key; 
+            }
+        }
         $matapelajaran      = Matapelajaran::all();
-        return view('kbm.jadwalpelajaran.index', compact('jadwalpelajaran','pegawai','matapelajaran'));
+        $tahunajaran        = Tahunajaran::where('status_tahun_ajaran','aktif')->first();
+        return view('kbm.jadwalpelajaran.index', compact('jadwalpelajaran','pegawai','matapelajaran','tahunajaran'));
     }
 
     /**
@@ -54,9 +67,17 @@ class JadwalpelajaranController extends Controller
      */
     public function show(Jadwalpelajaran $jadwalpelajaran)
     {
+       
         $matapelajaran  = $jadwalpelajaran->matapelajaran;
         $jadwalkelas    = $jadwalpelajaran->jadwalkelas;
-        return view('guru.jadwalpelajaran', compact('jadwalpelajaran','matapelajaran','jadwalkelas'));
+        $jadwal = [];
+        $hari   = sis_namahari();
+        foreach ($hari as $key) {
+            $jadwal[$key] = Jadwalkelas::where('jadwalpelajaran_id',$jadwalpelajaran->id)->where('hari',$key)->get();
+        }
+        $lamajam    = Jadwalkelas::where('jadwalpelajaran_id',$jadwalpelajaran->id)->sum('lama');
+        $kelas  = Kelas::all();
+        return view('kbm.jadwalpelajaran.show', compact('jadwalpelajaran','jadwal','matapelajaran','kelas','lamajam'));
     }
 
     /**
@@ -95,6 +116,8 @@ class JadwalpelajaranController extends Controller
      */
     public function destroy(Jadwalpelajaran $jadwalpelajaran)
     {
-        //
+        $jadwalpelajaran->delete();
+
+        return back()->with('dd','Jadwal Pelajaran');
     }
 }

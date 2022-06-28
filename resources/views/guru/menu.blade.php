@@ -16,7 +16,7 @@
     <ul class="nav nav-treeview">
       @forelse ($user->aksespegawai->pegawai->jadwalpelajaran as $item)
         <li class="nav-item">
-          <a href="{{ url('/jadwalpelajaran/'.$item->id)}}" class="nav-link">
+          <a href="{{ url('/homeguru/pelajaran/'.$item->id)}}" class="nav-link">
             &nbsp;&nbsp;<i class="fas fa-bullhorn nav-icon"></i>
             <p>{{ $item->matapelajaran->nama_pelajaran }}</p>
           </a>

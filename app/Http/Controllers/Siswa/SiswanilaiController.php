@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Guru;
+namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siswanilai;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 
 class SiswanilaiController extends Controller
@@ -36,7 +37,27 @@ class SiswanilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ujian = Ujian::find($request->ujian_id);
+        // cek jawaban
+        $index  = 1;
+        $benar  = 0;
+        $jawaban = $request->jawaban;
+        foreach ($ujian->soal as $k) {
+            if ($k->jawaban == $jawaban[$index]) {
+                $benar = $benar + 1;
+            }
+            $index++;
+        }
+
+        $nilai  = $benar/count($jawaban) * 100;
+
+        Siswanilai::create([
+            'ujian_id' => $ujian->id,
+            'siswa_id' => $request->siswa_id,
+            'nilai' => $nilai,
+            'jawaban' => json_encode($jawaban),
+        ]);
+        return back()->with('ds','Jawaban');
     }
 
     /**

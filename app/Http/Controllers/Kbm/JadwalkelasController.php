@@ -46,12 +46,12 @@ class JadwalkelasController extends Controller
             $jadwalpelajaran = Jadwalpelajaran::find($request->jadwalpelajaran_id);
             return back()->with('warningv2','Maaf Jadwal Pelajaran Kelas '.$kelas->nama_kelas.' mata pelajaran '.$jadwalpelajaran->matapelajaran->nama_pelajaran.' Hari '.$request->hari.' sudah ada');
         }
-        die();
         Jadwalkelas::create([
             'kelas_id' => $request->kelas_id,
             'jadwalpelajaran_id' => $request->jadwalpelajaran_id,
             'hari' => $request->hari,
-            'jam' => $request->jam_awal.'-'.$request->jam_akhir,
+            'lama' => $request->lama,
+            'jam' => $request->jam,
         ]);
         return back()->with('ds','Jadwal kelas');
     }

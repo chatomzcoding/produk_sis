@@ -18,7 +18,7 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-header">
-                       <a href="{{ url('jadwalpelajaran/'.$jadwalkelas->jadwalpelajaran_id) }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
+                       <a href="{{ url('homeguru/pelajaran/'.$jadwalkelas->jadwalpelajaran_id) }}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-angle-left"></i> Kembali</a>
                   </div>
                   <div class="card-body">
                     <div class="row">

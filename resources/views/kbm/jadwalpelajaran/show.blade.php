@@ -2,12 +2,14 @@
     <x-slot name="header">
         <div class="row mb-2">
             <div class="col-sm-6">
-            <h1 class="m-0">Data Jadwal Pelajaran</h1>
+            <h1 class="m-0">Jadwal Pelajaran - {{ $matapelajaran->nama_pelajaran }}</h1>
+            <p class="text-capitalize">Pengajar {{ $jadwalpelajaran->pegawai->nama_pegawai }}</p>
             </div><!-- /.col -->
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard')}}">Beranda</a></li>
-                <li class="breadcrumb-item active">Daftar Jadwal Pelajaran</li>
+                <li class="breadcrumb-item"><a href="{{ url('jadwalpelajaran')}}">Daftar Jadwal Pelajaran</a></li>
+                <li class="breadcrumb-item active">Jadwal Pelajaran</li>
             </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -15,6 +17,43 @@
     <x-slot name="content">
         <div class="container-fluid">
             <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <a href="{{ url('jadwalpelajaran') }}" class="btn btn-outline-secondary btn-sm pop-info"><i class="fas fa-angle-left"></i> Kembali</a>
+                        <span class="float-right p-1 font-italic">Jam Digunakan <strong>{{ $lamajam }}</strong> dari <strong>{{ $jadwalpelajaran->lama_jam }}</strong></span>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                @foreach ($jadwal as $hari => $value)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <strong class="text-uppercase">{{ $hari }}</strong>
+                            </div>
+                            <div class="card-body">
+                                @if (count($value) > 0)
+                                    <table class="table table-borderless">
+                                        @foreach ($value as $item)
+                                            <tr>
+                                                <th>Kelas {{ $item->kelas->nama_kelas }}</th>
+                                                <td>{{ $item->jam }} - {{ sis_jamakhir($item->jam,$item->lama) }}</td>
+                                                <td>{{ $item->lama }} jam</td>
+                                            </tr>
+                                        @endforeach
+                                    </table>
+                                @endif
+                                <section class="text-center">
+                                    <button  type="button" data-toggle="modal" data-hari="{{ $hari }}" data-target="#tambah" title="" class="btn btn-primary btn-sm" data-original-title="Edit Data"><i class="fa fa-plus"></i> TAMBAH JADWAL</button>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            {{-- <div class="row">
               <div class="col-md-12">
                 <div class="card">
                     @if (count($pegawai) > 1)
@@ -66,17 +105,17 @@
                     </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
         </div>
         
         <div class="modal fade" id="tambah">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
-                <form action="{{ url('jadwalpelajaran')}}" method="post" enctype="multipart/form-data">
+                <form action="{{ url('jadwalkelas')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="tahunajaran_id" value="{{ $tahunajaran->id }}">
+                    <input type="hidden" name="jadwalpelajaran_id" value="{{ $jadwalpelajaran->id }}">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Jadwal Pelajaran</h4>
+                    <h4 class="modal-title">Tambah Jadwal Pelajaran {{ $matapelajaran->nama_pelajaran }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -84,31 +123,31 @@
                 <div class="modal-body p-3">
                     <section class="p-3">
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Hari {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
-                                    <option value="">-- pilih mata pelajaran --</option>
-                                    @foreach ($matapelajaran as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
+                                <input type="text" name="hari" id="hari" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Kelas {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="kelas_id" id="kelas_id" class="form-control select2bs4" required>
+                                    @foreach ($kelas as $item)
+                                        <option value="{{ $item->id }}">{{ strtoupper($item->nama_kelas) }}</option>                                        
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Jam {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
-                                    <option value="">-- pilih tenaga pengajar --</option>
-                                    @foreach ($pegawai as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="time" name="jam" id="jam" value="{{ old('jam') }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Lama Waktu (jam) {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Lama Jam (1 jam = 45 menit) {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <input type="number" name="lama_jam" id="lama_jam" value="{{ old('lama_jam') }}" step="any" class="form-control" required>
+                                <input type="number" name="lama" id="lama" value="{{ old('lama') }}" class="form-control" required>
                             </div>
                         </div>
                     </section>
@@ -141,9 +180,7 @@
                             <div class="col-md-8 p-0">
                                 <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih mata pelajaran --</option>
-                                    @foreach ($matapelajaran as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
-                                    @endforeach
+                                   
                                 </select>
                             </div>
                         </div>
@@ -152,9 +189,7 @@
                             <div class="col-md-8 p-0">
                                 <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih tenaga pengajar --</option>
-                                    @foreach ($pegawai as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
-                                    @endforeach
+                                 
                                 </select>
                             </div>
                         </div>
@@ -176,6 +211,18 @@
         </div>
     </x-slot>
     <x-slot name="kodejs">
+        <script>
+            $('#tambah').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget)
+                var hari = button.data('hari')
+                var id = button.data('id')
+        
+                var modal = $(this)
+        
+                modal.find('.modal-body #hari').val(hari);
+                modal.find('.modal-body #id').val(id);
+            })
+        </script>
         <script>
             $('#ubah').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget)

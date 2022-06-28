@@ -102,18 +102,14 @@
                         <!-- /.tab-pane -->
       
                         <div class="tab-pane" id="settings">
-                            @foreach ($jadwalkelas as $item)
-                                <a href="{{ url('homeguru/agendakelas/'.$item->id) }}" class="btn btn-info">{{ $item->kelas->nama_kelas }}</a>
+                            @foreach ($kelas as $nama_kelas => $key)
+                                <a href="{{ url('homeguru/agendakelas/'.$key->id) }}" class="btn btn-info">{{ $nama_kelas }}</a>
                             @endforeach
                         </div>
-                        <!-- /.tab-pane -->
                       </div>
-                      <!-- /.tab-content -->
                     </div><!-- /.card-body -->
                   </div>
-                  <!-- /.card -->
                 </div>
-                <!-- /.col -->
               </div>
         </div>
         
@@ -158,6 +154,7 @@
                             <div class="col-md-8 p-0">
                                 <select name="sesi" id="" class="form-control">
                                     <option value="harian">HARIAN</option>
+                                    <option value="ulangan">ULANGAN</option>
                                     <option value="uts">Ulangan Tengah Semester</option>
                                     <option value="uas">Ulangan Akhir Semester</option>
                                 </select>

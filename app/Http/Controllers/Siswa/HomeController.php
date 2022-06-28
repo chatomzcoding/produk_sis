@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\Siswa;
+use App\Models\Siswanilai;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
 
@@ -33,10 +34,7 @@ class HomeController extends Controller
         foreach ($siswa->kbm->kelas->jadwalkelas as $key) {
             $ujian = $key->jadwalpelajaran->ujian;
             if (count($ujian) > 0) {
-                $jadwalujian[] = [
-                    'mata_pelajaran' => $key->jadwalpelajaran->matapelajaran->nama_pelajaran,
-                    'jadwal' => $ujian
-                ];
+                $jadwalujian[$key->jadwalpelajaran->matapelajaran->nama_pelajaran] = $ujian;
             }
         }
         return view('siswa.ujian', compact('siswa','jadwalujian'));
@@ -46,6 +44,7 @@ class HomeController extends Controller
     {
         $siswa  = Siswa::find($id);
         $ujian  = Ujian::find($ujian);
-        return view('siswa.soal', compact('siswa','ujian'));
+        $nilai  = Siswanilai::where('ujian_id',$ujian->id)->where('siswa_id',$siswa->id)->first();
+        return view('siswa.soal', compact('siswa','ujian','nilai'));
     }
 }

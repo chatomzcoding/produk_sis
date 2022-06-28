@@ -4,4 +4,4 @@ deployment:
     - export DEPLOYPATH=/home/smax1479/public_html/sistem
     - /bin/cp -R routes $DEPLOYPATH
     - /bin/cp -R resources $DEPLOYPATH
-    - /bin/cp -R app $DEPLOYPATH
+    - /bin/cp -R app $DEPLOY
