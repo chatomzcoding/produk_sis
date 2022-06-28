@@ -1,4 +1,4 @@
-<x-admin-layout title="Data Pegawai" menu="pegawai">
+<x-admin-layout title="Data Soal" menu="ujian">
     <x-slot name="header">
         <div class="row mb-2">
             <div class="col-sm-6">
