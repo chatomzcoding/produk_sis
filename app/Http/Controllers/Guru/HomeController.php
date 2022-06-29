@@ -24,13 +24,6 @@ class HomeController extends Controller
         $jadwalkelas = Jadwalkelas::find($id);
         $ujian          = $jadwalkelas->jadwalpelajaran->ujian;
         $kbm = $jadwalkelas->kelas->kbm;
-        // foreach ($kbm as $key) {
-        //     Siswanilai::create([
-        //         'ujian_id' => 3,
-        //         'siswa_id' => $key->siswa_id,
-        //         'nilai' => 75
-        //     ]);
-        // }
         $tanggal    = Absensikelas::where('jadwalkelas_id',$id)->distinct()->get(['tanggal']);
       
         $absensi    = [];
@@ -92,5 +85,11 @@ class HomeController extends Controller
             $kelas[$key->kelas->nama_kelas] = $key;
         }
         return view('guru.jadwalpelajaran', compact('jadwalpelajaran','matapelajaran','jadwalkelas','kelas'));
+    }
+
+    public function catatabsensi($id,$tanggal)
+    {
+        $jadwalkelas    = Jadwalkelas::find($id);
+        return view('guru.catatabsensi', compact('jadwalkelas','tanggal'));
     }
 }

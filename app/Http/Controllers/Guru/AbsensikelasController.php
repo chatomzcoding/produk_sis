@@ -37,22 +37,39 @@ class AbsensikelasController extends Controller
      */
     public function store(Request $request)
     {
-        // cek jika semua hadir
-        if ($request->status_absensi == 'semua') {
-            $jadwalkelas = Jadwalkelas::find($request->jadwalkelas_id);
-            foreach ($jadwalkelas->kelas->kbm as $key) {
+        $s = (isset($request->s)) ? $request->s : 'store' ;
+        if ($s == 'store') {
+            // cek jika semua hadir
+            if ($request->status_absensi == 'semua') {
+                $jadwalkelas = Jadwalkelas::find($request->jadwalkelas_id);
+                foreach ($jadwalkelas->kelas->kbm as $key) {
+                    Absensikelas::create([
+                        'jadwalkelas_id' => $request->jadwalkelas_id,
+                        'siswa_id' => $key->siswa_id,
+                        'tanggal' => $request->tanggal,
+                        'status_absensi' => 'hadir',
+                    ]);
+                }
+    
+                return back()->with('successv2','Siswa semua hadir');
+            } else {
+                return redirect('homeguru/catatabsensi/'.$request->jadwalkelas_id.'/'.$request->tanggal);
+            }
+        } else {
+            $index = 0;
+            foreach ($request->status_absensi as $id => $nilai) {
                 Absensikelas::create([
                     'jadwalkelas_id' => $request->jadwalkelas_id,
-                    'siswa_id' => $key->siswa_id,
+                    'siswa_id' => $id,
                     'tanggal' => $request->tanggal,
-                    'status_absensi' => 'hadir',
+                    'status_absensi' => $nilai,
+                    'keterangan' => $request->keterangan[$index],
                 ]);
+                $index++;
             }
-
-            return back()->with('successv2','Siswa semua hadir');
-        } else {
-            # code...
+            return redirect('homeguru/agendakelas/'.$request->jadwalkelas_id);
         }
+        
         
     }
 

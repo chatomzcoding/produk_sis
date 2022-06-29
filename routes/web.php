@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
     Route::get('homeguru/agendakelas/{id}',[GuruHomeController::class,'agendakelas']);
     Route::get('homeguru/pelajaran/{id}',[GuruHomeController::class,'pelajaran']);
+    Route::get('homeguru/catatabsensi/{id}/{tanggal}',[GuruHomeController::class,'catatabsensi']);
     Route::get('walikelas/{id}',[WalikelasController::class,'index']);
     Route::resource('ujian', UjianController::class);
     Route::resource('absensikelas', AbsensikelasController::class);

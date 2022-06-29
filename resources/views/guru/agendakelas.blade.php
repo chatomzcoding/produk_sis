@@ -40,7 +40,9 @@
                                               <tr>
                                                   <th width="5%" rowspan="2">No</th>
                                                   <th rowspan="2">Nama Siswa</th>
-                                                  <th colspan="{{ count($tanggal) }}" class="text-center">Tanggal</th>
+                                                  @if (count($tanggal) > 0)
+                                                      <th colspan="{{ count($tanggal) }}" class="text-center">Tanggal</th>
+                                                  @endif
                                                   <th colspan="5" class="text-center">Akumulasi</th>
                                                 </tr>
                                                 <tr>
@@ -157,6 +159,7 @@
                         <div class="col-md-8 p-0">
                             <select name="status_absensi" id="status_absensi" class="form-control" required>
                                 <option value="semua">SEMUA HADIR</option>
+                                <option value="sebagian">SEBAGIAN HADIR HADIR</option>
                             </select>
                         </div>
                     </div>
