@@ -77,7 +77,40 @@
                           <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                                 <section>
-                                    
+                                    <h3>KEHADIRAN SISWA BULAN {{ bulan_indo($bulan) }}</h3>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th rowspan="2">No</th>
+                                                    <th rowspan="2" width="25%">Nama</th>
+                                                    <th colspan="31">Tanggal</th>
+                                                </tr>
+                                                <tr>
+                                                    @for ($i = 1; $i <= 31; $i++)
+                                                        <td>{{ $i }}</td>
+                                                    @endfor
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($data as $item)
+                                                    <tr>
+                                                        <td class="text-center">{{ $item['no'] }}</td>
+                                                        <td class="text-capitalize">{{ $item['siswa']->nama_siswa }}</td>
+                                                        @foreach ($item['kehadiran'] as $i)
+                                                            <td>
+                                                                @if ($i == 1)
+                                                                    <i class="fas fa-check text-success"></i>
+                                                                @else
+                                                                    
+                                                                @endif
+                                                            </td>
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </section>
                             </div>
                             {{-- data siswa --}}
