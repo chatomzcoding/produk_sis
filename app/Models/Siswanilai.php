@@ -17,4 +17,9 @@ class Siswanilai extends Model
     {
         return $this->belongsTo(Siswa::class);
     }
+
+    public function ujian()
+    {
+        return $this->belongsTo(Ujian::class);
+    }
 }

@@ -31,6 +31,25 @@ if (! function_exists('sis_akseskhusus')) {
         return $result;
     }
 }
+if (! function_exists('sis_ratarata')) {
+    function sis_ratarata($data)
+    {
+        $result = array_sum($data) / count($data);
+        return $result;
+    }
+}
+if (! function_exists('sis_sesiujian')) {
+    function sis_sesiujian()
+    {
+        $sesi = [
+            'harian' => 'harian',
+            'ulangan' => 'ulangan',
+            'uts' => 'ulangan tengah semester',
+            'uas' => 'ulangan akhir semester'
+        ];
+        return $sesi;
+    }
+}
 if (! function_exists('sis_arsipdokumen')) {
     function sis_arsipdokumen()
     {

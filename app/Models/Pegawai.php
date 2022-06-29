@@ -27,4 +27,9 @@ class Pegawai extends Model
     {
         return $this->hasOne(Arsippegawai::class);
     }
+
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class);
+    }
 }

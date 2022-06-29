@@ -75,3 +75,12 @@
         @default
         
 @endswitch
+
+@isset($kelas)
+<li class="nav-item">
+    <a href="{{ url('walikelas/'.$kelas->id)}}" class="nav-link">
+      <i class="nav-icon fas fa-file"></i>
+      <p class="text">Wali Kelas {{ $kelas->nama_kelas }}</p>
+    </a>
+  </li>
+@endisset

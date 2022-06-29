@@ -13,6 +13,7 @@ use App\Http\Controllers\Guru\HomeController as GuruHomeController;
 use App\Http\Controllers\Guru\SiswanilaiController;
 use App\Http\Controllers\Guru\SoalController;
 use App\Http\Controllers\Guru\UjianController;
+use App\Http\Controllers\Guru\WalikelasController;
 use App\Http\Controllers\Homepage\LandingController;
 use App\Http\Controllers\Kbm\JadwalkelasController;
 use App\Http\Controllers\Kbm\JadwalpelajaranController;
@@ -66,6 +67,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     Route::get('homeguru/jadwal/{id}',[GuruHomeController::class,'jadwal']);
     Route::get('homeguru/agendakelas/{id}',[GuruHomeController::class,'agendakelas']);
     Route::get('homeguru/pelajaran/{id}',[GuruHomeController::class,'pelajaran']);
+    Route::get('walikelas/{id}',[WalikelasController::class,'index']);
     Route::resource('ujian', UjianController::class);
     Route::resource('absensikelas', AbsensikelasController::class);
     Route::resource('soal', SoalController::class);

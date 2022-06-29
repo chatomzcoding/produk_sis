@@ -30,4 +30,9 @@ class Ujian extends Model
     {
         return $this->hasMany(Siswanilai::class);
     }
+
+    public function jadwalpelajaran()
+    {
+        return $this->belongsTo(Jadwalpelajaran::class);
+    }
 }

@@ -22,4 +22,9 @@ class Siswa extends Model
     {
         return $this->hasOne(Kbm::class)->orderBy('id','DESC');
     }
+
+    public function siswanilai()
+    {
+        return $this->hasMany(Siswanilai::class);
+    }
 }
