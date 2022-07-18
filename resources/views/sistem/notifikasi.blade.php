@@ -67,3 +67,13 @@
     <p>Data {{ session('dd') }} telah dihapus.</p>
   </div>
 @endif
+
+@if ($errors->any())
+    <div class="callout callout-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

@@ -30,7 +30,7 @@
                                     <th>NIP/NUPTK</th>
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
+                                    <th>Jabatan</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -58,7 +58,7 @@
                                         <td>{{ $item->nip}}</td>
                                         <td>{{ $item->nama_pegawai}}</td>
                                         <td>{{ $item->jk}}</td>
-                                        <td>{{ $item->alamat}}</td>
+                                        <td>{{ $item->jabatan}}</td>
                                         <td class="text-center">{!! UIstatus($item->status) !!}</td>
                                     </tr>
                                 @empty

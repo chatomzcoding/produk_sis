@@ -33,7 +33,10 @@ class AdminLayout extends Component
         $user       = Auth::user();
         $datapokok  = Infowebsite::first();
         $tahunajaran    = Tahunajaran::where('status_tahun_ajaran','aktif')->first();
-        $kelas      = $user->aksespegawai->pegawai->kelas;
+        $kelas      = [];
+        if (isset($user->aksespegawai->pegawai->kelas)) {
+            $kelas      = $user->aksespegawai->pegawai->kelas;
+        }
         return view('components.admin-layout', compact('user','datapokok','tahunajaran','kelas'));
     }
 }

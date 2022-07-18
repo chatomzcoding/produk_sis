@@ -57,6 +57,47 @@
               </div>
             </div>
         </div>
+        <div class="modal fade" id="ubah">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <form action="{{ route('kelas'.'.update','test')}}" method="post">
+                    @csrf
+                    @method('patch')
+                <div class="modal-header">
+                <h4 class="modal-title">Edit Data Kelas</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body p-3">
+                    <input type="hidden" name="id" id="id">
+                    <section class="p-3">
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Nama Kelas {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <input type="text" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Wali Kelas {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4">
+                                    @foreach ($pegawai as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> SIMPAN PERUBAHAN</button>
+                </div>
+                </form>
+            </div>
+            </div>
+        </div>
         
         <div class="modal fade" id="tambah">
             <div class="modal-dialog modal-lg">
@@ -87,41 +128,10 @@
                                 </select>
                             </div>
                         </div>
-                    </section>
-                </div>
-                <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> SIMPAN</button>
-                </div>
-            </form>
-            </div>
-            </div>
-        </div>
-        <div class="modal fade" id="ubah">
-            <div class="modal-dialog modal-lg">
-              <div class="modal-content">
-                <form action="{{ route('kelas'.'.update','test')}}" method="post">
-                    @csrf
-                    @method('patch')
-                <div class="modal-header">
-                <h4 class="modal-title">Edit Data Kelas</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body p-3">
-                    <input type="hidden" name="id" id="id">
-                    <section class="p-3">
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Kelas {!! ireq() !!}</label>
-                            <div class="col-md-8 p-0">
-                                <input type="text" name="nama_kelas" id="nama_kelas" value="{{ old('nama_kelas') }}" class="form-control" required>
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Wali Kelas {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2">
+                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4">
                                     @foreach ($pegawai as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
                                     @endforeach
@@ -132,12 +142,13 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
-                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> SIMPAN PERUBAHAN</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> SIMPAN</button>
                 </div>
-                </form>
+            </form>
             </div>
             </div>
         </div>
+      
     </x-slot>
     <x-slot name="kodejs">
         <script>

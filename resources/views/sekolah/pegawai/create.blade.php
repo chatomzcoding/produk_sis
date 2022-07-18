@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 p-2">Tempat Tanggal Lahir {!! ireq() !!}</label>
+                                <label for="" class="col-md-4 p-2">Tempat Tanggal Lahir</label>
                                 <div class="col-md-6 p-0">
                                     <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir') }}" placeholder="tempat kelahiran" class="form-control" required>
                                 </div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 p-2">Alamat Pegawai {!! ireq() !!}</label>
+                                <label for="" class="col-md-4 p-2">Alamat Pegawai</label>
                                 <div class="col-md-8 p-0">
                                     <input type="text" name="alamat" id="alamat" value="{{ old('alamat') }}" class="form-control" required>
                                 </div>
@@ -59,7 +59,9 @@
                                 <div class="col-md-8 p-0">
                                     <select name="jabatan" id="jabatan" class="form-control" required>
                                         <option value="">-- pilih Jabatan --</option>
-                                        <option value="tenaga pengajar">Tenaga Pengajar</option>
+                                        @foreach (sis_jabatan() as $item)
+                                            <option value="{{ $item }}">{{ $item }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 {{-- <input type="text" name="jabatan" id="jabatan" value="{{ old('jabatan') }}" class="form-control"> --}}
@@ -98,7 +100,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-md-4 p-2">Photo {!! ireq() !!}</label>
+                                <label for="" class="col-md-4 p-2">Photo</label>
                                 <div class="col-md-8 p-0">
                                     <input type="file" name="poto" id="poto" value="{{ old('poto') }}" class="form-control">
                                 </div>

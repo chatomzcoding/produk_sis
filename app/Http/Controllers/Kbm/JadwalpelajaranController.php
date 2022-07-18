@@ -22,7 +22,7 @@ class JadwalpelajaranController extends Controller
     public function index()
     {
         $jadwalpelajaran    = Jadwalpelajaran::all();
-        $datapegawai            = Pegawai::where('jabatan','tenaga pengajar')->get();
+        $datapegawai            = Pegawai::where('jabatan','guru')->OrWhere('jabatan','wakil kepala sekolah')->get();
         // cek 
         $pegawai            = [];
         foreach ($datapegawai as $key) {
@@ -56,7 +56,7 @@ class JadwalpelajaranController extends Controller
     {
         Jadwalpelajaran::create($request->all());
 
-        return back()->with('ds','Mata Pelajran');
+        return back()->with('ds','Mata Pelajaran');
     }
 
     /**

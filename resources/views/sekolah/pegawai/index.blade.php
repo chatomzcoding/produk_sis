@@ -76,7 +76,7 @@
                                     <th>NIP/NUPTK</th>
                                     <th>Nama</th>
                                     <th>Jenis Kelamin</th>
-                                    <th>Alamat</th>
+                                    <th>Jabatan</th>
                                     <th>Akses</th>
                                     <th>Status</th>
                                 </tr>
@@ -104,7 +104,7 @@
                                         <td>{{ $item->nip}}</td>
                                         <td>{{ $item->nama_pegawai}}</td>
                                         <td>{{ $item->jk}}</td>
-                                        <td>{{ $item->alamat}}</td>
+                                        <td>{{ $item->jabatan}}</td>
                                         <td class="text-center">@if (isset($item->userakses))
                                           <span class="badge bg-success">ada</span>
                                         @else

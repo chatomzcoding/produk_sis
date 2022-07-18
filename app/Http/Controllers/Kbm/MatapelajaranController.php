@@ -38,6 +38,9 @@ class MatapelajaranController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama_pelajaran' => 'required|unique:mata_pelajaran',
+        ]);
         Matapelajaran::create($request->all());
 
         return back()->with('ds','Mata Pelajaran');

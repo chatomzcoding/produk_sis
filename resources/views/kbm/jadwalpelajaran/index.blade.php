@@ -29,8 +29,8 @@
                                     <tr>
                                         <th width="5%">No</th>
                                         <th width="10%">Aksi</th>
-                                        <th>Nama Mata Pelajaran</th>
                                         <th>Guru Pengajar</th>
+                                        <th>Nama Mata Pelajaran</th>
                                         <th>Waktu Mengajar</th>
                                     </tr>
                                 </thead>
@@ -46,14 +46,14 @@
                                                 </x-aksi>
                                             </td>
                                             <td>
-                                                @isset($item->matapelajaran)
-                                                    {{ $item->matapelajaran->nama_pelajaran}}</td>
-                                                @endisset
-                                            <td>
                                                 @isset($item->pegawai)
                                                     {{ $item->pegawai->nama_pegawai}}
                                                 @endisset
                                             </td>
+                                            <td>
+                                                @isset($item->matapelajaran)
+                                                    {{ $item->matapelajaran->nama_pelajaran}}</td>
+                                                @endisset
                                             <td>{{ $item->lama_jam}} Jam</td>
                                         </tr>
                                     @empty
@@ -84,23 +84,23 @@
                 <div class="modal-body p-3">
                     <section class="p-3">
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
-                                    <option value="">-- pilih mata pelajaran --</option>
-                                    @foreach ($matapelajaran as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
+                                <select name="pegawai_id" class="form-control select2bs4" required>
+                                    <option value="">-- pilih tenaga pengajar --</option>
+                                    @foreach ($pegawai as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
+                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
-                                <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
-                                    <option value="">-- pilih tenaga pengajar --</option>
-                                    @foreach ($pegawai as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
+                                <select name="matapelajaran_id" class="form-control select2bs4" required>
+                                    <option value="">-- pilih mata pelajaran --</option>
+                                    @foreach ($matapelajaran as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -137,23 +137,23 @@
                     <input type="hidden" name="id" id="id">
                     <section class="p-3">
                         <div class="form-group row">
-                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
-                            <div class="col-md-8 p-0">
-                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
-                                    <option value="">-- pilih mata pelajaran --</option>
-                                    @foreach ($matapelajaran as $item)
-                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="" class="col-md-4 p-2">Nama Tenaga Pengajar {!! ireq() !!}</label>
                             <div class="col-md-8 p-0">
                                 <select name="pegawai_id" id="pegawai_id" class="form-control select2bs4" required>
                                     <option value="">-- pilih tenaga pengajar --</option>
                                     @foreach ($pegawai as $item)
                                         <option value="{{ $item->id }}">{{ ucwords($item->nama_pegawai) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 p-2">Nama Pelajaran {!! ireq() !!}</label>
+                            <div class="col-md-8 p-0">
+                                <select name="matapelajaran_id" id="matapelajaran_id" class="form-control select2bs4" required>
+                                    <option value="">-- pilih mata pelajaran --</option>
+                                    @foreach ($matapelajaran as $item)
+                                        <option value="{{ $item->id }}">{{ ucwords($item->nama_pelajaran) }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -20,7 +20,7 @@ class KelasController extends Controller
     public function index()
     {
         $kelas  = Kelas::orderBy('nama_kelas','ASC')->get();
-        $pegawai = Pegawai::where('jabatan','tenaga pengajar')->orderBy('nama_pegawai','ASC')->get();
+        $pegawai = Pegawai::where('jabatan','guru')->orderBy('nama_pegawai','ASC')->get();
         return view('kbm.kelas.index', compact('kelas','pegawai'));
     }
 
@@ -42,6 +42,10 @@ class KelasController extends Controller
      */
     public function store(Request $request)
     {
+        // Cek jika input nama kelas yang sama
+        $request->validate([
+            'nama_kelas' => 'required|unique:kelas',
+        ]);
         Kelas::create($request->all());
 
         return back()->with('ds','Kelas');
